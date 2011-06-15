@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<i18n baseKey="m.privatemessaging.bo.general" lcid="fr_FR">
+	<key id="module-name">messagerie privée</key>
+	<key id="system-folder-name">messagerie privée</key>
+	<key id="invalid-topic">Rubrique non valide.</key>
+	<key id="topic-already-contains-some-of-this-pages">Cette rubrique contient déjà certaines des pages.</key>
+</i18n>

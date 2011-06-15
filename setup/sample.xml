@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<script>
+	<binding fileName="modules/website/persistentdocument/import/website_binding.xml" />
+	<binding fileName="modules/privatemessaging/persistentdocument/import/privatemessaging_binding.xml" />
+	
+	<website byTag="default_modules_website_default-website">
+		<execute method="setDocumentIdAttribute" />
+		<topic byLabel="Messagerie privée">
+			<execute method="setDocumentIdAttribute" />
+			<binding fileName="modules/privatemessaging/setup/globalDefaultStructure.xml" />
+		</topic>
+	</website>
+</script>

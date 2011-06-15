@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<i18n baseKey="m.privatemessaging.fo" lcid="fr_FR">
+	<key id="private-messaging">messagerie privée</key>
+	<key id="thread-list">liste des conversations privées</key>
+	<key id="newthread">nouvelle conversation privée</key>
+	<key id="nothread">vous n'avez aucune conversation privée en cours.</key>
+	<key id="message-preview">prévisualisation du message</key>
+	<key id="message-input">saisie du message</key>
+	<key id="subject">sujet de la conversation</key>
+	<key id="answers">réponses</key>
+	<key id="last-post">dernier message</key>
+	<key id="followers">participants</key>
+	<key id="and">et</key>
+	<key id="by">par</key>
+	<key id="answer">répondre</key>
+	<key id="top">revenir en haut</key>
+	<key id="has-new-post">un nouveau message</key>
+	<key id="has-n-new-posts">{count} nouveaux messages</key>
+	<key id="has-no-new-post">aucun nouveau message</key>
+	<key id="you-have-some-new-posts">vous avez de nouveaux messages</key>
+	<key id="is-new-thread">nouveau sujet</key>
+	<key id="cancelfollowthread">quitter cette conversation</key>
+	<key id="back-to-thread">revenir à la conversation</key>
+	<key id="newpost">nouveau message</key>
+	<key id="threadslist">liste des conversations</key>
+	<key id="you-are-last-follower">vous êtes le dernier participant</key>
+	<key id="confirm-unfollow-title">êtes vous sûr de vouloir quitter cette conversation ?</key>
+	<key id="confirm-unfollow-description">si vous quittez cette conversation, vous ne pourrez plus consulter ses messages. De plus les conversations qui n'ayant plus aucun participant sont automatiquement supprimées.</key>
+	<key id="invite-new-followers">inviter de nouveaux participants</key>
+	<key id="last-posts-in-thread">derniers messages de la conversation</key>
+	<key id="see-page">voir la page</key>
+	<key id="unknown-username">Il n'y a pas d'utilisateur pour le nom ″{username}″.</key>
+	<key id="receivers">destinataires séparés par des virgules</key>
+	<key id="member-informations">messagerie privée</key>
+	<key id="start-new-private-conversation">débuter une nouvelle conversation privée</key>
+	<key id="written-by">écrit par</key>
+	<key id="answer-to">en réponse à</key>
+	<key id="toanswerof">en réponse à</key>
+	<key id="thislink">ce lien</key>
+	<key id="unknown">inconnu</key>
+	<key id="form-submit">valider</key>
+	<key id="form-preview">prévisualiser</key>
+	<key id="member-title">titre</key>
+	<key id="member-titles">titres</key>
+	<key id="member-rank">rang</key>
+	<key id="quote">citer</key>
+</i18n>

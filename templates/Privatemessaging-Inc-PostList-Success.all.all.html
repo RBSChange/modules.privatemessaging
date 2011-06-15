@@ -1,0 +1,74 @@
+<tal:block tal:define="global displayConfig postListInfo/displayConfig" />
+
+<ul class="message-list">
+	<tal:block tal:repeat="post postListInfo/paginator">
+		<li class="erased" tal:condition="post/wasDeleted" id="post-${post/getId}">
+			<em>${trans:m.privatemessaging.fo.deletedpost,ucf}</em>
+		</li>
+		
+		<tal:block tal:condition="not: post/wasDeleted">
+			<li class="${php: repeat.post.start ? 'start' : ''} ${php: repeat.post.end ? 'last' : ''} ${php: repeat.post.odd ? 'odd' : 'even'}" id="post-${post/getId}">
+				<div class="message-header">
+					<p class="float-right" tal:condition="not: displayConfig/hidePostLink">
+						<a change:link="document post">${post/getPostId}</a>
+						<tal:block tal:condition="post/isAnswer">${trans:m.privatemessaging.fo.answer-to} <a change:link="document post/getAnswerof">${post/getAnswerof/getPostId}</a> ${trans:m.privatemessaging.fo.written-by,ucf} <a change:link="document post/getAnswerof/getPostauthor">${post/getAnswerOf/getAuthorNameAsHtml}</a></tal:block>
+					</p>
+					<p>
+						<tal:block change:memberdate="value post/getCreationdate; mode 'long'" />
+					</p>						
+				</div>
+				
+				<div class="message-body">
+					<div class="author-information" tal:define="fmember post/getPostauthor/getForumMember">
+						<tal:block tal:condition="displayConfig/showGravatars">
+							<img src="${php: post->getPostauthor()->getGravatarUrl(displayConfig['avatarsSize'])}" class="image" alt="" />
+							<br />
+						</tal:block>
+						<tal:block tal:condition="not:fmember">${post/getAuthorNameAsHtml}</tal:block>
+						<tal:block tal:condition="fmember">
+							<a change:link="document fmember">${fmember/getLabelAsHtml}</a>
+							<tal:block tal:repeat="title fmember/getPublishedTitleArray">
+								<br />
+								<strong>${trans:m.privatemessaging.fo.member-title,ucf,lab}</strong> ${title/getLabelAsHtml}
+								<tal:block tal:define="visual title/getVisual" tal:condition="visual/isPublished">
+									<br />
+									<img change:media="document visual" />
+								</tal:block>
+							</tal:block>
+							<tal:block tal:define="rank fmember/getRank" tal:condition="rank">
+								<br />
+								<strong>${trans:m.privatemessaging.fo.member-rank,ucf,lab}</strong> ${rank/getLabelAsHtml}
+								<tal:block tal:define="visual rank/getVisual" tal:condition="visual/isPublished">
+									<br />
+									<img change:media="document visual" />
+								</tal:block>
+							</tal:block>
+						</tal:block>		
+					</div>
+			
+					<div class="message-content">
+						${post/getTextAsHtml}
+						<tal:block tal:condition="displayConfig/showSignatures">
+							<tal:block tal:condition="post/getPostauthor/getForumMember/getSignature">
+								<hr class="signature-separator" />
+								<div class="member-signature">${post/getPostauthor/getForumMember/getSignatureAsHtml}</div>
+							</tal:block>
+						</tal:block>
+					</div>
+				</div>
+		
+				<div class="message-footer">
+					<div class="ip-anchor">
+						<a class="link" href="#top">${trans:m.privatemessaging.fo.top,ucf}</a>
+					</div>
+					<div class="options-list" tal:condition="php: displayConfig['showActions']">
+						<a change:link="tag contextual_website_website_modules_privatemessaging_newpost; privatemessagingParam[cmpref] post/getThread/getId ; privatemessagingParam[postid] post/getId">${trans:m.privatemessaging.fo.answer,ucf}</a>
+						<span> | </span><a change:link="tag contextual_website_website_modules_privatemessaging_newpost; privatemessagingParam[cmpref] post/getThread/getId ; privatemessagingParam[postid] post/getId ; privatemessagingParam[quote] 'true'">${trans:m.privatemessaging.fo.quote,ucf}</a>
+					</div>
+				</div>
+			</li>
+		</tal:block>
+	</tal:block>
+</ul>
+
+<tal:block tal:condition="displayConfig/showPagination" change:paginator="postListInfo/paginator" />

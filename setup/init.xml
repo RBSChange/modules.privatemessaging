@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<script>
+	<binding fileName="modules/website/persistentdocument/import/website_binding.xml" />
+	<binding fileName="modules/list/persistentdocument/import/list_binding.xml" />
+	<binding fileName="modules/notification/persistentdocument/import/notification_binding.xml" />
+	<binding fileName="modules/privatemessaging/persistentdocument/import/privatemessaging_binding.xml" />
+
+	<systemfolder module="list" relatedmodule="forums">
+		<staticlistupdate listid="modules_users/editprofilepanels">
+			<staticitem label="&amp;modules.privatemessaging.fo.Member-informations;" value="privatemessaging/EditMemberProfile" />
+		</staticlistupdate>
+	</systemfolder>
+	
+	<systemfolder module="notification" relatedmodule="privatemessaging">
+		<attribute name="body">
+			<![CDATA[Bonjour {receiverPseudonym},<br/><br/>{postAuthor} a posté un nouveau message dans la conversation <a class="link" href="{postUrl}">{threadLabel}</a>.]]>
+		</attribute>
+		<notification label="Nouveau message privé" codename="modules_privatemessaging/newprivatemessage" availableparameters="receiverPseudonym,threadLabel,postAuthor,postUrl"
+				subject="Nouveau message privé" header="" body-attr="" footer="" />
+	</systemfolder>
+</script>

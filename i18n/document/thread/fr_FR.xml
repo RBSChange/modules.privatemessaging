@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<i18n baseKey="m.privatemessaging.document.thread" lcid="fr_FR">
+  <key id="document-name">conversation privée</key>
+  <key id="label">sujet</key>
+  <key id="label-help">sujet de la conversation</key>
+  <key id="firstpost">premier message</key>
+  <key id="firstpost-help">premier message de cette conversation privée.</key>
+  <key id="nbpost">nombre de message</key>
+  <key id="nbpost-help">nombre de messages que comporte cette conversation privée.</key>
+  <key id="followers">destinataires</key>
+  <key id="followers-help">destinataires de cette conversation privée. Seules ces membres pourront lire les messages qu'elle comporte.</key>
+</i18n>

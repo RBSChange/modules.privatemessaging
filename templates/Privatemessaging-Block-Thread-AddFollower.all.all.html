@@ -1,0 +1,12 @@
+<h2 change:h="">${trans:m.privatemessaging.fo.invite-new-followers,ucf}</h2>
+
+<form change:form="beanClass privatemessaging_persistentdocument_thread; beanName thread" class="cmxform post-form">
+	<ul change:errors=""></ul>
+	<tal:block change:field="name beanId" hidden="true" />
+	<ol>
+		<li><input change:textinput="" required="true" name="receivers" labeli18n="m.privatemessaging.fo.receivers" /></li>
+	</ol>
+	<p class="buttons">
+		<input class="button" change:submit="labeli18n m.privatemessaging.fo.form-submit" name="addFollower" />
+	</p>
+</form>

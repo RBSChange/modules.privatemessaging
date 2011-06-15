@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<document xmlns="http://www.rbs.fr/schema/change-document/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.rbs.fr/schema/change-document/1.0 http://www.rbschange.fr/static/schema/change-document/1.0.xsd"
+	model-version="1.0" backoffice-indexable="false" has-url="true" icon="thread" publish-on-day-change="false">
+	<properties>
+		<add name="firstPost" type="modules_privatemessaging/post" />
+		<add name="nbpost" type="Integer" default-value="0" />
+		<add name="followers" type="modules_privatemessaging/member" max-occurs="5" />
+		<add name="tofollow" type="modules_privatemessaging/post" />
+		<add name="lastPostDate" type="DateTime" />
+	</properties>
+	<statuses default="ACTIVE" />
+</document>

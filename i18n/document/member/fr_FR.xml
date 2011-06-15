@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<i18n baseKey="m.privatemessaging.document.member" lcid="fr_FR">
+  <key id="document-name">utilisateur de la messagerie privée</key>
+  <key id="blockedmembers">liste d'ignorés</key>
+  <key id="blockedmembers-help">les personnes de la liste d'ignorés ne pourront pas vous evoyer de message privé.</key>
+  <key id="contacts">contacts</key>
+  <key id="contacts-help">votre liste de contacts vous permet d'accéder rapidement aux membres avec lesquels vous correspondez fréquemment.</key>
+  <key id="viewavatars">voir les avatars</key>
+  <key id="viewavatars-help">voir ou non les avatars des membres dans les messages privés.</key>
+  <key id="viewsignatures">voir les signatures</key>
+  <key id="viewsignatures-help">voir ou non les signatures des membres dans les messages privés.</key>
+  <key id="notifynewmessages">avertir des nouveaux messages</key>
+  <key id="notifynewmessages-help">cochez cette case pour recevoir un e-mail à chaque nouveau message privé.</key>
+</i18n>

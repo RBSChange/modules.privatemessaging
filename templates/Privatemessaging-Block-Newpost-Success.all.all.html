@@ -1,0 +1,29 @@
+<h2 change:h="">${trans:m.privatemessaging.fo.newpost,ucf,lab} ${thread/getLabelAsHtml}</h2>
+
+<tal:block tal:condition="previewPostInfo">
+	<h3 change:h="">${trans:m.privatemessaging.fo.message-preview,ucf}</h3>
+	<tal:block change:include="module 'forums'; template 'Forums-Inc-PostList-Success'; type 'html'; postListInfo previewPostInfo" />
+</tal:block>
+
+<h3 change:h="">${trans:m.privatemessaging.fo.message-input,ucf}</h3>
+<form change:form="beanClass forums_persistentdocument_post; beanName post" class="cmxform post-form">
+	<div change:errors=""></div>
+	<tal:block change:field="name beanId" hidden="true" />
+	<tal:block change:field="name thread" hidden="true" value="${thread/getId}" />
+	<tal:block tal:condition="answerof" change:field="name answerof" hidden="true" value="${answerof/getId}" />
+	<ol>
+  		<li><label change:fieldlabel="name text"></label> <input change:richtextinput="name text; editor bbcode" required="true" /></li>
+	</ol>
+	<p class="buttons">
+		<input class="button" name="preview" change:submit="labeli18n m.privatemessaging.fo.form-preview" />
+		<input class="button" change:submit="labeli18n m.privatemessaging.fo.form-submit" />
+	</p>
+</form>
+<tal:block tal:condition="answerof">
+	<h2 change:h="">${trans:m.privatemessaging.fo.toanswerof,ucf} <a change:link="document answerof/getPostauthor">${answerof/getAuthorNameAsHtml}</a></h2>
+	<tal:block change:include="module 'privatemessaging'; template 'Privatemessaging-Inc-PostList-Success'; type 'html'; postListInfo answerListInfo" />
+</tal:block>
+<tal:block tal:condition="not: answerof">
+	<h2 change:h="">${trans:m.privatemessaging.fo.last-posts-in-thread,ucf}</h2>
+	<tal:block change:include="module 'privatemessaging'; template 'Privatemessaging-Inc-PostList-Success'; type 'html'; postListInfo lastPostListInfo" />
+</tal:block>

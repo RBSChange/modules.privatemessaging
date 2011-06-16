@@ -139,10 +139,10 @@ class privatemessaging_PostService extends f_persistentdocument_DocumentService
 			{
 				$forumMember = forums_MemberService::getInstance()->getByUser($follower->getUser());
 				$ms = $forumMember->getDocumentService();
-				$notif = $ns->getConfiguredByCodeName('modules_privatemessaging/newprivatemessage', $ms->getWebsiteId($member), $member->getLang());
+				$notif = $ns->getConfiguredByCodeName('modules_privatemessaging/newprivatemessage', $ms->getWebsiteId($forumMember), $forumMember->getLang());
 				if ($notif instanceof notification_persistentdocument_notification)
 				{
-					$user = $member->getUser();
+					$user = $forumMember->getUser();
 					$callback = array($this, 'getNotificationParameters');
 					$callbackParams = array('post' => $document, 'member' => $forumMember);
 					$user->getDocumentService()->sendNotificationToUserCallback($notif, $user, $callback, $callbackParams);
@@ -162,7 +162,7 @@ class privatemessaging_PostService extends f_persistentdocument_DocumentService
 		$post = $params['post'];		
 		$parameters['trheadLabel'] = $post->getThread()->getLabelAsHtml();
 		$parameters['postUrl'] = $post->getPostUrlInThread();
-		$authorForumMember = forums_MemberService::getInstance()->getByUser($document->getPostauthor()->getUser());
+		$authorForumMember = forums_MemberService::getInstance()->getByUser($post->getPostauthor()->getUser());
 		$parameters['postAuthor'] = $authorForumMember->getLabelAsHtml();
 		
 		if (isset($params['member']) && $params['member'] instanceof forums_persistentdocument_member)

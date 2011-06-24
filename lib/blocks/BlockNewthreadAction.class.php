@@ -87,7 +87,6 @@ class privatemessaging_BlockNewthreadAction extends privatemessaging_BlockPostLi
 	{
 		$post = $thread->getFirstPost();
 		$post->setThread($thread);
-		$post->setText(website_BBCodeService::getInstance()->fixContent($post->getText()));
 		$post->setPostauthor(privatemessaging_MemberService::getInstance()->getCurrentMember());
 		$post->setCreationdate(date_Calendar::getInstance()->toString());
 		$request->setAttribute('thread', $thread);

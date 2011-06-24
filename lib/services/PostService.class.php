@@ -92,21 +92,6 @@ class privatemessaging_PostService extends f_persistentdocument_DocumentService
 	 * @param Integer $parentNodeId Parent node ID where to save the document.
 	 * @return void
 	 */
-	protected function preSave($document, $parentNodeId = null)
-	{
-		parent::preSave($document, $parentNodeId);
-		
-		if ($document->isPropertyModified('text'))
-		{
-			$document->setText(website_BBCodeService::getInstance()->fixContent($document->getText()));
-		}
-	}
-	
-	/**
-	 * @param privatemessaging_persistentdocument_post $document
-	 * @param Integer $parentNodeId Parent node ID where to save the document.
-	 * @return void
-	 */
 	protected function postInsert($document, $parentNodeId = null)
 	{
 		parent::postInsert($document, $parentNodeId);

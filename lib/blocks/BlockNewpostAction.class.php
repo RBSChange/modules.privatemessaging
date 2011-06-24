@@ -120,7 +120,6 @@ class privatemessaging_BlockNewpostAction extends privatemessaging_BlockPostList
 		{
 			$post->setAnswerof(null);
 		}
-		$post->setText(website_BBCodeService::getInstance()->fixContent($post->getText()));
 		$post->setPostauthor(forums_MemberService::getInstance()->getCurrentMember());
 		$post->setCreationdate(date_Calendar::getInstance()->toString());
 		$request->setAttribute('post', $post);

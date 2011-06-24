@@ -32,7 +32,26 @@ class privatemessaging_persistentdocument_post extends privatemessaging_persiste
 	 */
 	public function getTextAsHtml()
 	{
-		return website_BBCodeService::getInstance()->toHtml($this->getText());
+		$parser = new website_BBCodeParser();
+		return $parser->convertXmlToHtml($this->getText());
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getTextAsBBCode()
+	{
+		$parser = new website_BBCodeParser();
+		return $parser->convertXmlToBBCode($this->getText());
+	}
+
+	/**
+	 * @param string $bbcode
+	 */
+	public function setTextAsBBCode($bbcode)
+	{
+		$parser = new website_BBCodeParser();
+		$this->setText($parser->convertBBCodeToXml($bbcode, 'default'));
 	}
 	
 	/**

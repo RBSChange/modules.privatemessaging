@@ -51,7 +51,7 @@ class privatemessaging_persistentdocument_post extends privatemessaging_persiste
 	public function setTextAsBBCode($bbcode)
 	{
 		$parser = new website_BBCodeParser();
-		$this->setText($parser->convertBBCodeToXml($bbcode, 'default'));
+		$this->setText($parser->convertBBCodeToXml($bbcode, $parser->getModuleProfile('privatemessaging')));
 	}
 	
 	/**

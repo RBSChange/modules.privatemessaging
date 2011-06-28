@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <script>
 	<binding fileName="modules/website/persistentdocument/import/website_binding.xml" />
-	
-	<attribute name="template" default="true">webfactory/tplTwo</attribute>
-	
+
 	<topic byDocumentId-attr="">
 		<page label="Liste des conversations" isIndexPage="true" navigationVisibility="hidden" indexingstatus="false"
 			byTag="contextual_website_website_modules_privatemessaging_threadlist">

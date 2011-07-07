@@ -6,7 +6,7 @@
 	</form>
 </tal:block>
 
-<h2 change:h="">${thread/getLabelAsHtml}</h2>
+<h1 change:h="">${thread/getLabelAsHtml}</h1>
 <p class="normal" tal:define="count thread/getFollowersCount">
 	<tal:block tal:condition="php: count LE 1">${trans:m.privatemessaging.fo.you-are-last-follower,ucf}</tal:block>
 	<tal:block tal:condition="php: count GT 1">
@@ -20,17 +20,30 @@
 
 <form metal:use-macro="goToPageForm"></form>
 
-<ul class="inline-menu">
-	<li><a change:link="tag contextual_website_website_modules_privatemessaging_newpost; privatemessagingParam[cmpref] thread/getId">${trans:m.privatemessaging.fo.newpost,ucf}</a></li>
+<ul class="inline-list">
+	<li>
+		<a change:link="tag contextual_website_website_modules_privatemessaging_newpost; privatemessagingParam[cmpref] thread/getId">${trans:m.privatemessaging.fo.newpost,ucf}</a>
+		<span> | </span>
+	</li>
 	<li><a change:link="tag contextual_website_website_modules_privatemessaging_threadlist">${trans:m.privatemessaging.fo.threadslist,ucf}</a></li>
 </ul>
+
+<div class="cleaner"></div>
 
 <tal:block change:include="module 'privatemessaging'; template 'Privatemessaging-Inc-PostList-Success'; type 'html'; postListInfo postListInfo" />
 
 <form metal:use-macro="goToPageForm"></form>
 
-<ul class="inline-menu">
-	<li><a change:link="tag contextual_website_website_modules_privatemessaging_newpost; privatemessagingParam[cmpref] thread/getId">${trans:m.privatemessaging.fo.newpost,ucf}</a></li>
-	<li><a class="link" change:link="document thread; privatemessagingParam[unfollow] '1'">${trans:m.privatemessaging.fo.cancelfollowthread,ucf}</a></li>
-	<li><a class="link" change:link="document thread; privatemessagingParam[addFollower] '1'">${trans:m.privatemessaging.fo.invite-new-followers,ucf}</a></li>
+<ul class="inline-list">
+	<li>
+		<a change:link="tag contextual_website_website_modules_privatemessaging_newpost; privatemessagingParam[cmpref] thread/getId">${trans:m.privatemessaging.fo.newpost,ucf}</a>
+		<span> | </span>
+	</li>
+	<li>
+		<a change:link="document thread; privatemessagingParam[unfollow] '1'">${trans:m.privatemessaging.fo.cancelfollowthread,ucf}</a>
+		<span> | </span>
+	</li>
+	<li><a change:link="document thread; privatemessagingParam[addFollower] '1'">${trans:m.privatemessaging.fo.invite-new-followers,ucf}</a></li>
 </ul>
+
+<div class="cleaner"></div>

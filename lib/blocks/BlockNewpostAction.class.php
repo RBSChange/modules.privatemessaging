@@ -25,7 +25,7 @@ class privatemessaging_BlockNewpostAction extends privatemessaging_BlockPostList
 			if ($request->getParameter('quote') == 'true' && !$request->getParameter('text') && $request->getParameter('postid'))
 			{
 				$quotedPost = privatemessaging_persistentdocument_post::getInstanceById($request->getParameter('postid'));
-				$post->setText('[quote="' . $quotedPost->getAuthorNameAsHtml() . '"]' . $quotedPost->getText() . '[/quote]');
+				$post->setTextAsBBCode('[quote="' . $quotedPost->getAuthorNameAsHtml() . '"]' . $quotedPost->getTextAsBBCode() . '[/quote]');
 				$request->setAttribute('post', $post);
 			}
 			
@@ -120,7 +120,7 @@ class privatemessaging_BlockNewpostAction extends privatemessaging_BlockPostList
 		{
 			$post->setAnswerof(null);
 		}
-		$post->setPostauthor(forums_MemberService::getInstance()->getCurrentMember());
+		$post->setPostauthor(privatemessaging_MemberService::getInstance()->getCurrentMember());
 		$post->setCreationdate(date_Calendar::getInstance()->toString());
 		$request->setAttribute('post', $post);
 		

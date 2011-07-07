@@ -1,12 +1,4 @@
-<tal:block tal:define="global lnum">${trans:m.privatemessaging.fo.num,ucf}</tal:block>
-<tal:block metal:define-macro="goToPageForm">
-	<form tal:condition="php: postListInfo['paginator'].getPageCount() GT 1" method="get" action="" class="float-right">
-		<input type="text" class="textfield" name="privatemessagingParam[page]" value="${postListInfo/paginator/getCurrentPageNumber}" size="4" onclick="if(this.value=='${lnum}')this.value='';"/>
-		<input type="submit" class="button" value="$trans:m.privatemessaging.fo.see-page,ucf,attr}"/>
-	</form>
-</tal:block>
-
-<h2 change:h="">${thread/getLabelAsHtml}</h2>
+<h1 change:h="">${thread/getLabelAsHtml}</h1>
 <p class="normal" tal:define="count thread/getFollowersCount">
 <tal:block tal:condition="php: count LE 1">${trans:m.privatemessaging.fo.you-are-last-follower,ucf}</tal:block>
 	<tal:block tal:condition="php: count GT 1">
@@ -18,7 +10,7 @@
 	</tal:block>
 </p>
 
-<h3 change:h="">${trans:m.privatemessaging.fo.confirm-unfollow-title,ucf}</h3>
+<h2 change:h="">${trans:m.privatemessaging.fo.confirm-unfollow-title,ucf}</h2>
 <p class="normal">${trans:m.privatemessaging.fo.confirm-unfollow-description,ucf}</p>
 
 <p class="buttons">

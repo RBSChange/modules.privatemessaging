@@ -63,7 +63,7 @@ class privatemessaging_BlockNewthreadAction extends privatemessaging_BlockPostLi
 		$post->getDocumentService()->activate($post->getId());
 		
 		$url = LinkHelper::getDocumentUrl($thread);
-		HttpController::getInstance()->redirectToUrl($url);
+		change_Controller::getInstance()->redirectToUrl($url);
 	}
 
 	/**

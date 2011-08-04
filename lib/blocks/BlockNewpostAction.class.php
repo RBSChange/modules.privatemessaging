@@ -33,7 +33,7 @@ class privatemessaging_BlockNewpostAction extends privatemessaging_BlockPostList
 			return $this->getInputViewName();
 		}
 		
-		$agaviUser = Controller::getInstance()->getContext()->getUser();
+		$agaviUser = change_Controller::getInstance()->getContext()->getUser();
 		$agaviUser->setAttribute('illegalAccessPage', $_SERVER["REQUEST_URI"]);
 		$request->setAttribute('member', forums_MemberService::getInstance()->getCurrentMember());
 		return $this->getTemplateByFullName('modules_forums', 'Forums-Block-Generic-Forbidden');
@@ -97,7 +97,7 @@ class privatemessaging_BlockNewpostAction extends privatemessaging_BlockPostList
 		$post->save();
 		$post->getDocumentService()->activate($post->getId());
 						
-		HttpController::getInstance()->redirectToUrl(LinkHelper::getDocumentUrl($post));
+		change_Controller::getInstance()->redirectToUrl(LinkHelper::getDocumentUrl($post));
 	}
 	
 	/**

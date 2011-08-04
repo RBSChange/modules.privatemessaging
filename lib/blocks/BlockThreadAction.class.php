@@ -21,7 +21,7 @@ class privatemessaging_BlockThreadAction extends privatemessaging_BlockPostListB
 		$member = privatemessaging_MemberService::getInstance()->getCurrentMember();
 		if ($member === null)
 		{
-			Controller::getInstance()->redirect('website', 'Error500');
+			change_Controller::getInstance()->redirect('website', 'Error500');
 		}
 				
 		$thread = $this->getDocumentParameter();

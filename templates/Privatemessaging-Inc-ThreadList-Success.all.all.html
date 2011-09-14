@@ -17,7 +17,7 @@
 					<img tal:condition="not: newCount" change:img="front/has-no-new-post.png" title="${trans:m.privatemessaging.fo.has-no-new-post,attr,ucf}" />
 				</td>
 				<td class="column-label" tal:define="count thread/getFollowersCount">
-					<a href="${thread/getUserUrl}" class="link">${thread/getLabelAsHtml}</a>
+					<a href="${thread/getUserUrl}" class="link">${thread/getLabel}</a>
 					<br />
 					<tal:block tal:condition="php: count LE 1">${trans:m.privatemessaging.fo.you-are-last-follower,ucf}</tal:block>
 					<tal:block tal:condition="php: count GT 1">

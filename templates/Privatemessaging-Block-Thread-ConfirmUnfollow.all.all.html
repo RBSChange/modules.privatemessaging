@@ -1,4 +1,4 @@
-<h1 change:h="">${thread/getLabelAsHtml}</h1>
+<h1 change:h="">${thread/getLabel}</h1>
 <p class="normal" tal:define="count thread/getFollowersCount">
 <tal:block tal:condition="php: count LE 1">${trans:m.privatemessaging.fo.you-are-last-follower,ucf}</tal:block>
 	<tal:block tal:condition="php: count GT 1">

@@ -11,7 +11,7 @@
 				<div class="message-header">
 					<p class="float-right" tal:condition="not: displayConfig/hidePostLink">
 						<a change:link="document post">${post/getPostId}</a>
-						<tal:block tal:condition="post/isAnswer">${trans:m.privatemessaging.fo.answer-to} <a change:link="document post/getAnswerof">${post/getAnswerof/getPostId}</a> ${trans:m.privatemessaging.fo.written-by,ucf} <a change:link="document post/getAnswerof/getPostauthor">${post/getAnswerOf/getAuthorNameAsHtml}</a></tal:block>
+						<tal:block tal:condition="post/isAnswer">${trans:m.privatemessaging.fo.answer-to} <a change:link="document post/getAnswerof">${post/getAnswerof/getPostId}</a> ${trans:m.privatemessaging.fo.written-by,ucf} <a change:link="document post/getAnswerof/getPostauthor">${structure post/getAnswerOf/getAuthorNameAsHtml}</a></tal:block>
 					</p>
 					<p>
 						<tal:block change:memberdate="value post/getCreationdate; mode 'long'" />
@@ -25,12 +25,12 @@
 							<img src="${php: post->getPostauthor()->getGravatarUrl(displayConfig['avatarsSize'])}" class="image" alt="" />
 							<br />
 						</tal:block>
-						<tal:block tal:condition="not:fmember">${post/getAuthorNameAsHtml}</tal:block>
+						<tal:block tal:condition="not:fmember">${structure post/getAuthorNameAsHtml}</tal:block>
 						<tal:block tal:condition="fmember">
-							<a change:link="document fmember">${fmember/getLabelAsHtml}</a>
+							<a change:link="document fmember">${fmember/getLabel}</a>
 							<tal:block tal:repeat="title fmember/getPublishedTitleArray">
 								<br />
-								<strong>${trans:m.privatemessaging.fo.member-title,ucf,lab}</strong> ${title/getLabelAsHtml}
+								<strong>${trans:m.privatemessaging.fo.member-title,ucf,lab}</strong> ${title/getLabel}
 								<tal:block tal:define="visual title/getVisual" tal:condition="visual/isPublished">
 									<br />
 									<img change:media="document visual" />
@@ -38,7 +38,7 @@
 							</tal:block>
 							<tal:block tal:define="rank fmember/getRank" tal:condition="rank">
 								<br />
-								<strong>${trans:m.privatemessaging.fo.member-rank,ucf,lab}</strong> ${rank/getLabelAsHtml}
+								<strong>${trans:m.privatemessaging.fo.member-rank,ucf,lab}</strong> ${rank/getLabel}
 								<tal:block tal:define="visual rank/getVisual" tal:condition="visual/isPublished">
 									<br />
 									<img change:media="document visual" />
@@ -48,11 +48,11 @@
 					</div>
 			
 					<div class="message-content">
-						${post/getTextAsHtml}
+						${structure post/getTextAsHtml}
 						<tal:block tal:condition="displayConfig/showSignatures">
 							<tal:block tal:condition="post/getPostauthor/getForumMember/getSignature">
 								<hr class="signature-separator" />
-								<div class="member-signature">${post/getPostauthor/getForumMember/getSignatureAsHtml}</div>
+								<div class="member-signature">${structure post/getPostauthor/getForumMember/getSignatureAsHtml}</div>
 							</tal:block>
 						</tal:block>
 					</div>

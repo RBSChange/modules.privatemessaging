@@ -1,4 +1,4 @@
-<h1 change:h="">${trans:m.privatemessaging.fo.newpost,ucf,lab} ${thread/getLabelAsHtml}</h1>
+<h1 change:h="">${trans:m.privatemessaging.fo.newpost,ucf,lab} ${thread/getLabel}</h1>
 
 <tal:block tal:condition="previewPostInfo">
 	<tal:block change:include="module 'privatemessaging'; template 'Privatemessaging-Inc-PostList-Success'; type 'html'; postListInfo previewPostInfo" />

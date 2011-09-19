@@ -1,9 +1,0 @@
-treechildren::-moz-tree-image(modules_privatemessaging_thread){
-	list-style-image: url(/changeicons/small/thread.png);
-}
-treechildren::-moz-tree-image(modules_privatemessaging_post){
-	list-style-image: url(/changeicons/small/message.png);
-}
-treechildren::-moz-tree-image(modules_privatemessaging_member){
-	list-style-image: url(/changeicons/small/member.png);
-}

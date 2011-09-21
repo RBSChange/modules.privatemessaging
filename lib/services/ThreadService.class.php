@@ -169,12 +169,50 @@ class privatemessaging_ThreadService extends f_persistentdocument_DocumentServic
 	}
 
 	/**
-	 * @param forums_persistentdocument_thread $document
+	 * @param privatemessaging_persistentdocument_thread $document
 	 * @return integer
 	 */
 	public function getWebsiteId($document)
 	{
 		return website_WebsiteModuleService::getInstance()->getCurrentWebsite()->getId();
+	}
+		
+	/**
+	 * @param privatemessaging_persistentdocument_member $member
+	 * @param integer $max the maximum number of threads that can treat
+	 * @return integer the number of treated threads
+	 */	
+	public function treatThreadsForMemberDeletion($member, $max)
+	{
+		$count = 0;
+		foreach (array('followers') as $fieldName)
+		{
+			$query = $this->createQuery();
+			$query->add(Restrictions::eq($fieldName, $member));
+			$query->setFirstResult(0)->setMaxResults($max - $count);
+			$threads = $query->find();
+			foreach ($threads as $thread)
+			{
+				/* @var $thread privatemessaging_persistentdocument_thread */
+				$thread->getDocumentService()->treatThreadForMemberDeletion($thread, $member);
+			}
+			$count += count($threads);
+		}
+		if (Framework::isInfoEnabled())
+		{
+			Framework::info(__METHOD__ . ' ' . $count . ' threads treated');
+		}
+		return $count;
+	}
+	
+	/**
+	 * @param privatemessaging_persistentdocument_thread $thread
+	 * @param privatemessaging_persistentdocument_member $member
+	 */	
+	protected function treatThreadForMemberDeletion($thread, $member)
+	{
+		$thread->removeFollowers($member);		
+		$thread->save();
 	}
 	
 	// TODO: delete if no follower.

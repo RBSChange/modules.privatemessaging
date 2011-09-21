@@ -171,4 +171,46 @@ class privatemessaging_PostService extends f_persistentdocument_DocumentService
 	{
 		return LinkHelper::getDocumentUrl($document->getThread(), null, array('privatemessagingParam[postId]' => $document->getId())) . "#post-" . $document->getId();
 	}
+	
+	/**
+	 * @param privatemessaging_persistentdocument_member $member
+	 * @param integer $max the maximum number of posts that can treat
+	 * @return integer the number of treated posts
+	 */	
+	public function treatPostsForMemberDeletion($member, $max)
+	{
+		$count = 0;
+		foreach (array('postauthor') as $fieldName)
+		{
+			$query = $this->createQuery();
+			$query->add(Restrictions::eq($fieldName, $member));
+			$query->setFirstResult(0)->setMaxResults($max - $count);
+			$posts = $query->find();
+			foreach ($posts as $post)
+			{
+				/* @var $post privatemessaging_persistentdocument_post */
+				$post->getDocumentService()->treatPostForMemberDeletion($post, $member);
+			}
+			$count += count($posts);
+		}
+		if (Framework::isInfoEnabled())
+		{
+			Framework::info(__METHOD__ . ' ' . $count . ' posts treated');
+		}
+		return $count;
+	}
+	
+	/**
+	 * @param privatemessaging_persistentdocument_post $post
+	 * @param privatemessaging_persistentdocument_member $member
+	 */	
+	protected function treatPostForMemberDeletion($post, $member)
+	{
+		if (DocumentHelper::equals($post->getPostauthor(), $member))
+		{
+			$post->setPostauthor(null);
+			$post->setMeta('postAuthorDeletedMember', $member->getLabel() . ' (' . $member->getId() . ')');
+		}		
+		$post->save();
+	}
 }

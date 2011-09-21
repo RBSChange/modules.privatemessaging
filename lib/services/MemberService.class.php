@@ -137,4 +137,75 @@ class privatemessaging_MemberService extends f_persistentdocument_DocumentServic
 		
 		$document->setInsertInTree(false);
 	}
+	
+	/**
+	 * @param privatemessaging_persistentdocument_member $member
+	 * @param integer $max the maximum number of posts that can treat
+	 * @return integer the number of treated posts
+	 */
+	public function deleteMember($member, $max)
+	{
+		// Handle members.
+		$max -= $this->treatMembersForMemberDeletion($member, $max);
+		if ($max < 1)
+		{
+			return $max;
+		}
+		
+		// Handle posts.
+		$max -= privatemessaging_PostService::getInstance()->treatPostsForMemberDeletion($member, $max);
+		if ($max < 1)
+		{
+			return $max;
+		}
+		
+		// Handle threads.
+		$max -= privatemessaging_ThreadService::getInstance()->treatThreadsForMemberDeletion($member, $max);
+		if ($max < 1)
+		{
+			return $max;
+		}
+		
+		$member->delete();
+		return $max - 1;
+	}
+	
+	/**
+	 * @param privatemessaging_persistentdocument_member $member
+	 * @param integer $max the maximum number of posts that can treat
+	 * @return integer the number of treated posts
+	 */
+	protected function treatMembersForMemberDeletion($member, $max)
+	{
+		$count = 0;
+		foreach (array('blockedMembers', 'contacts') as $fieldName)
+		{
+			$query = $this->createQuery();
+			$query->add(Restrictions::eq($fieldName, $member));
+			$query->setFirstResult(0)->setMaxResults($max - $count);
+			$docs = $query->find();
+			foreach ($docs as $doc)
+			{
+				/* @var $doc privatemessaging_persistentdocument_member */
+				$post->getDocumentService()->treatMemberForMemberDeletion($doc, $member);
+			}
+			$count += count($docs);
+		}
+		if (Framework::isInfoEnabled())
+		{
+			Framework::info(__METHOD__ . ' ' . $count . ' members treated');
+		}
+		return $count;
+	}
+	
+	/**
+	 * @param privatemessaging_persistentdocument_member $doc
+	 * @param privatemessaging_persistentdocument_member $member
+	 */	
+	protected function treatMemberForMemberDeletion($doc, $member)
+	{
+		$doc->removeBlockedMembers($member);
+		$doc->removeContacts($member);
+		$doc->save();
+	}
 }

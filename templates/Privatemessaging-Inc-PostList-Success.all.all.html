@@ -11,7 +11,13 @@
 				<div class="message-header">
 					<p class="float-right" tal:condition="not: displayConfig/hidePostLink">
 						<a change:link="document post">${post/getPostId}</a>
-						<tal:block tal:condition="post/isAnswer">${trans:m.privatemessaging.fo.answer-to} <a change:link="document post/getAnswerof">${post/getAnswerof/getPostId}</a> ${trans:m.privatemessaging.fo.written-by,ucf} <a change:link="document post/getAnswerof/getPostauthor">${structure post/getAnswerOf/getAuthorNameAsHtml}</a></tal:block>
+						<tal:block tal:condition="post/isAnswer" tal:define="answerOf post/getAnswerof; answerOfAuthor answerOf/getPostauthor">
+							${trans:m.privatemessaging.fo.answer-to}
+							<a change:link="document post/getAnswerof">${post/getAnswerof/getPostId}</a>
+							${trans:m.privatemessaging.fo.written-by,ucf}
+							<tal:block tal:condition="answerOfAuthor"><a change:link="document answerOfAuthor">${answerOf/getAuthorName}</a></tal:block>
+							<tal:block tal:condition="not: answerOfAuthor">${answerOf/getAuthorName}</tal:block>
+						</tal:block>
 					</p>
 					<p>
 						<tal:block change:memberdate="value post/getCreationdate; mode 'long'" />
@@ -19,10 +25,10 @@
 					<div class="cleaner"></div>					
 				</div>
 				
-				<div class="message-body">
-					<div class="author-information" tal:define="fmember post/getPostauthor/getForumMember">
+				<div class="message-body" tal:define="author post/getPostauthor; fmember post/getPostauthor/getForumMember">
+					<div class="author-information" tal:condition="author">
 						<tal:block tal:condition="displayConfig/showGravatars">
-							<img src="${php: post->getPostauthor()->getGravatarUrl(displayConfig['avatarsSize'])}" class="image" alt="" />
+							<img src="${php: author->getGravatarUrl(displayConfig['avatarsSize'])}" class="image" alt="" />
 							<br />
 						</tal:block>
 						<tal:block tal:condition="not:fmember">${structure post/getAuthorNameAsHtml}</tal:block>
@@ -46,13 +52,16 @@
 							</tal:block>
 						</tal:block>
 					</div>
+					<div class="author-information" tal:condition="not: author">
+						${trans:m.forums.frontoffice.unknown,ucf}
+					</div>
 			
 					<div class="message-content">
 						${structure post/getTextAsHtml}
 						<tal:block tal:condition="displayConfig/showSignatures">
-							<tal:block tal:condition="post/getPostauthor/getForumMember/getSignature">
+							<tal:block tal:condition="fmember/getSignature">
 								<hr class="signature-separator" />
-								<div class="member-signature">${structure post/getPostauthor/getForumMember/getSignatureAsHtml}</div>
+								<div class="member-signature">${structure fmember/getSignatureAsHtml}</div>
 							</tal:block>
 						</tal:block>
 					</div>

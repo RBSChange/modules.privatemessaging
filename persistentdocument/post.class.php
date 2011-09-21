@@ -17,6 +17,19 @@ class privatemessaging_persistentdocument_post extends privatemessaging_persiste
 	/**
 	 * @return String
 	 */
+	public function getAuthorName()
+	{
+		$member = $this->getPostauthor();
+		if ($member instanceof privatemessaging_persistentdocument_member)
+		{
+			return $member->getLabel();
+		}
+		return LocaleService::getInstance()->transFO('m.privatemessaging.fo.unknown', array('ucf'));
+	}
+	
+	/**
+	 * @return String
+	 */
 	public function getAuthorNameAsHtml()
 	{
 		$member = $this->getPostauthor();

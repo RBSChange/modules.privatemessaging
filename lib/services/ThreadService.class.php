@@ -174,7 +174,7 @@ class privatemessaging_ThreadService extends f_persistentdocument_DocumentServic
 	 */
 	public function getWebsiteId($document)
 	{
-		return website_WebsiteModuleService::getInstance()->getCurrentWebsite()->getId();
+		return website_WebsiteService::getInstance()->getCurrentWebsite()->getId();
 	}
 		
 	/**

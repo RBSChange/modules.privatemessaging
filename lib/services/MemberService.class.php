@@ -61,13 +61,13 @@ class privatemessaging_MemberService extends f_persistentdocument_DocumentServic
 	}
 	
 	/**
-	 * @param users_persistentdocument_frontenduser $user
+	 * @param users_persistentdocument_user $user
 	 * @param Boolean $createIfNull
 	 * @return privatemessaging_persistentdocument_member
 	 */
 	public function getByUser($user, $createIfNull = true)
 	{
-		if ($user instanceof users_persistentdocument_websitefrontenduser)
+		if ($user instanceof users_persistentdocument_user)
 		{
 			$member = $this->createQuery()->add(Restrictions::eq('user', $user))->findUnique();
 			if ($member === null && $createIfNull)
@@ -90,7 +90,7 @@ class privatemessaging_MemberService extends f_persistentdocument_DocumentServic
 	{
 		if ($website === null)
 		{
-			$website = website_WebsiteModuleService::getInstance()->getCurrentWebsite();
+			$website = website_WebsiteService::getInstance()->getCurrentWebsite();
 		}
 		
 		$forumMember = forums_MemberService::getInstance()->getByLabel($userName, $website->getId());

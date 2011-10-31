@@ -145,7 +145,7 @@ class privatemessaging_PostService extends f_persistentdocument_DocumentService
 		$parameters = array();
 		
 		$post = $params['post'];		
-		$parameters['trheadLabel'] = $post->getThread()->getLabelAsHtml();
+		$parameters['threadLabel'] = $post->getThread()->getLabelAsHtml();
 		$parameters['postUrl'] = $post->getPostUrlInThread();
 		$authorForumMember = forums_MemberService::getInstance()->getByUser($post->getPostauthor()->getUser());
 		$parameters['postAuthor'] = $authorForumMember->getLabelAsHtml();

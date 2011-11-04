@@ -1,6 +1,6 @@
 <h2 change:h="">${trans:m.privatemessaging.fo.thread-list,ucf}</h2>
-<ul class="inline-menu">
-	<li><a change:link="tag contextual_website_website_modules_privatemessaging_newthread; privatemessagingParam[cmpref] forum/getId">${trans:m.privatemessaging.fo.newthread,ucf}</a></li>
+<ul class="inline-list">
+	<li><a change:link="tag contextual_website_website_modules_privatemessaging_newthread">${trans:m.privatemessaging.fo.newthread,ucf}</a></li>
 </ul>
 
 <tal:block tal:condition="php: count(paginator)">

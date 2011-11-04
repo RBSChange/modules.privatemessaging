@@ -4,9 +4,9 @@
 	<tal:block change:include="module 'privatemessaging'; template 'Privatemessaging-Inc-PostList-Success'; type 'html'; postListInfo previewPostInfo" />
 </tal:block>
 
-<form change:form="beanClass forums_persistentdocument_post; beanName post">
+<form change:form="beanClass privatemessaging_persistentdocument_post; beanName post">
 	<fieldset>
-		<legend>${trans:m.forums.frontoffice.message-input,ucf}</legend>
+		<legend>${trans:m.privatemessaging.fo.message-input,ucf}</legend>
 		<div change:errors=""></div>
 		<ol>
 	  		<li><input change:bbcodeinput="name textAsBBCode" module-profile="privatemessaging" labeled="true" required="true" /></li>
@@ -21,7 +21,7 @@
 	</fieldset>
 </form>
 <tal:block tal:condition="answerof">
-	<h2 change:h="">${trans:m.privatemessaging.fo.toanswerof,ucf} <a change:link="document answerof/getPostauthor">${structure answerof/getAuthorNameAsHtml}</a></h2>
+	<h2 change:h="">${trans:m.privatemessaging.fo.toanswerof,ucf} <a change:link="document answerof/getAuthoridInstance">${answerof/getAuthorName}</a></h2>
 	<tal:block change:include="module 'privatemessaging'; template 'Privatemessaging-Inc-PostList-Success'; type 'html'; postListInfo answerListInfo" />
 </tal:block>
 <tal:block tal:condition="not: answerof">

@@ -54,19 +54,6 @@ class privatemessaging_ThreadService extends f_persistentdocument_DocumentServic
 	
 	/**
 	 * @param privatemessaging_persistentdocument_thread $thread
-	 * @param String $text
-	 */
-	public function addPost($thread, $text)
-	{
-		$post = forums_PostService::getInstance()->getNewDocumentInstance();
-		$post->setText($text);
-		$post->setThread($thread);
-		$post->save();
-		$post->activate();
-	}
-	
-	/**
-	 * @param privatemessaging_persistentdocument_thread $thread
 	 * @param Integer $start
 	 * @param Integer $limit
 	 * @return privatemessaging_persistentdocument_post[]
@@ -123,10 +110,11 @@ class privatemessaging_ThreadService extends f_persistentdocument_DocumentServic
 	 */
 	public function getUserUrl($thread)
 	{
-		$member = privatemessaging_MemberService::getInstance()->getCurrentMember();
-		if ($member !== null)
+		$user = users_UserService::getInstance()->getCurrentUser();
+		$profile = ($user) ? privatemessaging_PrivatemessagingprofileService::getInstance()->getByAccessorId($user->getId()) : null;
+		if ($profile)
 		{
-			$date = $member->getLastReadDateByThreadId($thread->getId());
+			$date = $profile->getLastReadDateByThreadId($thread->getId());
 			if ($date !== null)
 			{
 				$post = $this->getFirstUnreadPost($thread, $date);
@@ -140,14 +128,32 @@ class privatemessaging_ThreadService extends f_persistentdocument_DocumentServic
 	}
 	
 	/**
-	 * @param privatemessaging_persistentdocument_member $forum
-	 * @return privatemessaging_persistentdocument_threads[]
+	 * @param users_persistentdocument_user $user
+	 * @return privatemessaging_persistentdocument_thread[]
 	 */
-	public function getByMember($member)
+	public function getByUser($user)
 	{
 		return privatemessaging_ThreadService::getInstance()->createQuery()->add(Restrictions::published())
-			->add(Restrictions::eq('followers', $member))
+			->add(Restrictions::eq('followers', $user))
 			->addOrder(Order::desc('lastpostdate'))->find();
+	}
+	
+	/**
+	 * @param users_persistentdocument_user[] $users
+	 * @return privatemessaging_persistentdocument_thread[]
+	 */
+	public function getByUsers($users)
+	{
+		if (count($users) < 1)
+		{
+			return array();
+		}
+		$query = privatemessaging_ThreadService::getInstance()->createQuery()->add(Restrictions::published());
+		foreach ($users as $user)
+		{
+			$query->add(Restrictions::eq('followers', $user));
+		}
+		return $query->addOrder(Order::desc('lastpostdate'))->find();
 	}
 
 	/**
@@ -161,10 +167,10 @@ class privatemessaging_ThreadService extends f_persistentdocument_DocumentServic
 				
 		$document->setInsertInTree(false);
 		
-		$member = privatemessaging_MemberService::getInstance()->getCurrentMember();
-		if ($member !== null)
+		$user = users_UserService::getInstance()->getCurrentUser();
+		if ($user !== null)
 		{
-			$document->addFollowers($member);
+			$document->addFollowers($user);
 		}
 	}
 
@@ -178,41 +184,28 @@ class privatemessaging_ThreadService extends f_persistentdocument_DocumentServic
 	}
 		
 	/**
-	 * @param privatemessaging_persistentdocument_member $member
+	 * @param users_persistentdocument_user $user
 	 * @param integer $max the maximum number of threads that can treat
 	 * @return integer the number of treated threads
 	 */	
-	public function treatThreadsForMemberDeletion($member, $max)
+	public function treatThreadsForUserDeletion($user, $max)
 	{
-		$count = 0;
-		foreach (array('followers') as $fieldName)
+		$query = $this->createQuery();
+		$query->add(Restrictions::eq('authorid', $user->getId()));
+		$query->setFirstResult(0)->setMaxResults($max - $count);
+		$threads = $query->find();
+		foreach ($threads as $thread)
 		{
-			$query = $this->createQuery();
-			$query->add(Restrictions::eq($fieldName, $member));
-			$query->setFirstResult(0)->setMaxResults($max - $count);
-			$threads = $query->find();
-			foreach ($threads as $thread)
-			{
-				/* @var $thread privatemessaging_persistentdocument_thread */
-				$thread->getDocumentService()->treatThreadForMemberDeletion($thread, $member);
-			}
-			$count += count($threads);
+			/* @var $thread privatemessaging_persistentdocument_thread */
+			$thread->removeFollowers($user);		
+			$thread->save();
 		}
+		$count = count($threads);
 		if (Framework::isInfoEnabled())
 		{
 			Framework::info(__METHOD__ . ' ' . $count . ' threads treated');
 		}
 		return $count;
-	}
-	
-	/**
-	 * @param privatemessaging_persistentdocument_thread $thread
-	 * @param privatemessaging_persistentdocument_member $member
-	 */	
-	protected function treatThreadForMemberDeletion($thread, $member)
-	{
-		$thread->removeFollowers($member);		
-		$thread->save();
 	}
 	
 	// TODO: delete if no follower.

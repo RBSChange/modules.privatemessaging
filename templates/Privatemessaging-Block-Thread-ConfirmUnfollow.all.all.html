@@ -5,7 +5,7 @@
 		${trans:m.privatemessaging.fo.Followers,ucf,lab}
 		<tal:block tal:repeat="follower thread/getFollowersArray">
 			<tal:block tal:condition="php: !repeat.follower.start && repeat.follower.end"> ${trans:m.privatemessaging.fo.and} </tal:block>
-			<strong>${follower/getMemberLink}</strong><tal:block tal:condition="php: repeat.follower.index LT (repeat.follower.length - 2)">, </tal:block>
+			<strong><a change:link="document follower">${follower/getLabel}</a></strong><tal:block tal:condition="php: repeat.follower.index LT (repeat.follower.length - 2)">, </tal:block>
 		</tal:block>
 	</tal:block>
 </p>

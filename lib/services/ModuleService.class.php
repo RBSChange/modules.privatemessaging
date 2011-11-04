@@ -27,11 +27,11 @@ class privatemessaging_ModuleService extends ModuleBaseService
 	 */
 	public function hasNewPost()
 	{
-		$member = privatemessaging_MemberService::getInstance()->getCurrentMember();
+		$user = users_UserService::getInstance()->getCurrentUser();
 		$query = privatemessaging_ThreadService::getInstance()->createQuery();
-		$query->add(Restrictions::published())->add(Restrictions::eq('followers', $member));
+		$query->add(Restrictions::published())->add(Restrictions::eq('followers', $user));
 		$query->addOrder(Order::desc('lastpostdate'))->setMaxResults(1);
-		$thread  = f_util_ArrayUtils::firstElement($query->find());
+		$thread = $query->findUnique();
 		return ($thread !== null) && ($thread->getNbnewpost() > 0);
 	}
 	
@@ -46,7 +46,7 @@ class privatemessaging_ModuleService extends ModuleBaseService
 		// Check container.
 		if (!$container instanceof website_persistentdocument_topic)
 		{
-			throw new BaseException('Invalid topic', 'modules.privatemessaging.bo.general.Invalid-topic');
+			throw new BaseException('Invalid topic', 'm.website.bo.actions.invalid-topic');
 		}
 		$websiteId = $container->getDocumentService()->getWebsiteId($container);
 	
@@ -63,5 +63,22 @@ class privatemessaging_ModuleService extends ModuleBaseService
 		$attributes['byDocumentId'] = $container->getId();
 		$attributes['type'] = $container->getPersistentModel()->getName();
 		return $attributes;
+	}
+	
+	/**
+	 * @param users_persistentdocument_user $user
+	 * @param integer $max the maximum number of documents that can treat
+	 * @return integer the maximum number of documents that can still treat
+	 */
+	public function prepareUserDeletion($user, $max)
+	{
+		// Handle threads.
+		$max -= privatemessaging_ThreadService::getInstance()->treatThreadsForUserDeletion($user, $max);
+		if ($max < 1)
+		{
+			return $max;
+		}
+		
+		return $max;
 	}
 }

@@ -18,14 +18,14 @@ class privatemessaging_BlockThreadAction extends privatemessaging_BlockPostListB
 			return website_BlockView::NONE;
 		}
 		
-		$member = privatemessaging_MemberService::getInstance()->getCurrentMember();
-		if ($member === null)
+		$user = users_UserService::getInstance()->getCurrentUser();
+		if (!($user instanceof users_persistentdocument_user))
 		{
-			change_Controller::getInstance()->redirect('website', 'Error500');
+			return $this->getForbiddenView();
 		}
-				
+						
 		$thread = $this->getDocumentParameter();
-		if ($thread === null || !($thread instanceof privatemessaging_persistentdocument_thread) || !in_array($member, $thread->getFollowersArray()))
+		if ($thread === null || !($thread instanceof privatemessaging_persistentdocument_thread) || !in_array($user, $thread->getFollowersArray()))
 		{
 			$this->redirect('privatemessaging', 'Threadlist');
 		}
@@ -35,7 +35,7 @@ class privatemessaging_BlockThreadAction extends privatemessaging_BlockPostListB
 		{
 			if ($request->hasNonEmptyParameter('confirmUnfollow'))
 			{
-				$thread->removeFollowers(privatemessaging_MemberService::getInstance()->getCurrentMember());
+				$thread->removeFollowers($user);
 				$thread->save();
 				$this->redirect('privatemessaging', 'Threadlist');
 			}
@@ -66,7 +66,8 @@ class privatemessaging_BlockThreadAction extends privatemessaging_BlockPostListB
 				
 		if (count($posts) > 0)
 		{
-			$member->getDocumentService()->setPostAsReadForMember($member, f_util_ArrayUtils::lastElement($posts));
+			$post = f_util_ArrayUtils::lastElement($posts);
+			$post->getDocumentService()->setAsReadForUser($post, $user);
 		}
 		
 		$request->setAttribute('unfollowUrl', LinkHelper::getDocumentUrl($thread, null, array('privatemessagingParam[page]' => $page, 'privatemessagingParam[unfollow]' => 1)));
@@ -88,19 +89,20 @@ class privatemessaging_BlockThreadAction extends privatemessaging_BlockPostListB
 	 */
 	function executeAddFollower($request, $response, privatemessaging_persistentdocument_thread $thread)
 	{
+		$website = website_WebsiteService::getInstance()->getCurrentWebsite();
 		$usernames = explode(',', $request->getParameter('receivers'));
 		$ok = true;
 		foreach ($usernames as $username)
 		{
-			$member = privatemessaging_MemberService::getInstance()->getByUserName(trim($username));
-			if ($member === null)
+			$user = users_UserService::getInstance()->getPublishedByLabel(trim($username), $website->getGroup()->getId());
+			if ($user === null)
 			{
 				$ok = false;
-				$this->addError(LocaleService::getInstance()->transFO('m.privatemessaging.fo.unknown-username', array('ucf'), array('username' => $username)));
+				$this->addError(LocaleService::getInstance()->trans('m.privatemessaging.fo.unknown-username', array('ucf'), array('username' => $username)));
 			}
 			else 
 			{
-				$thread->addFollowers($member);
+				$thread->addFollowers($user);
 			}
 		}
 		if ($ok)

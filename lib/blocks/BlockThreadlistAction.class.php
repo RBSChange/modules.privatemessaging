@@ -3,7 +3,7 @@
  * privatemessaging_BlockThreadlistAction
  * @package modules.privatemessaging.lib.blocks
  */
-class privatemessaging_BlockThreadlistAction extends website_BlockAction
+class privatemessaging_BlockThreadlistAction extends privatemessaging_BaseBlockAction
 {
 	/**
 	 * @see website_BlockAction::execute()
@@ -18,14 +18,14 @@ class privatemessaging_BlockThreadlistAction extends website_BlockAction
 			return website_BlockView::NONE;
 		}
 
-		$member = privatemessaging_MemberService::getInstance()->getCurrentMember();
-		if ($member === null)
+		$user = users_UserService::getInstance()->getCurrentUser();
+		if (!($user instanceof users_persistentdocument_user))
 		{
-			return website_BlockView::NONE;
+			return $this->getForbiddenView();
 		}
-		$request->setAttribute('member', $member);
+		$request->setAttribute('user', $user);
 
-		$threads = privatemessaging_ThreadService::getInstance()->getByMember($member);
+		$threads = privatemessaging_ThreadService::getInstance()->getByUser($user);
 		$paginator = new paginator_Paginator('privatemessaging', $request->getParameter('page', 1), $threads, $this->getNbItemPerPage($request, $response));
 		
 		$request->setAttribute('paginator', $paginator);

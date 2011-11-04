@@ -8,27 +8,21 @@
 	<block type="modules_privatemessaging_thread" icon="thread">
 		<parameters>
 			<parameter name="nbitemperpage" type="Integer" default-value="1" hidden="true" />
-			<parameter name="showGravatars" type="Boolean" default-value="true" />
 			<parameter name="avatarsSize" type="Integer" default-value="64" />
-			<parameter name="showSignatures" type="Boolean" default-value="true" />
 			<parameter name="showActions" type="Boolean" default-value="true" hidden="true" />
 		</parameters>
 	</block>
 	<block type="modules_privatemessaging_newthread" icon="add">
 		<parameters>
 			<parameter name="nbitemperpage" type="Integer" default-value="1" hidden="true" />
-			<parameter name="showGravatars" type="Boolean" default-value="true" />
 			<parameter name="avatarsSize" type="Integer" default-value="64" />
-			<parameter name="showSignatures" type="Boolean" default-value="true" />
 			<parameter name="showActions" type="Boolean" default-value="false" hidden="true" />
 		</parameters>
 	</block>
 	<block type="modules_privatemessaging_newpost" icon="add">
 		<parameters>
 			<parameter name="nbitemperpage" type="Integer" default-value="20" />
-			<parameter name="showGravatars" type="Boolean" default-value="true" />
 			<parameter name="avatarsSize" type="Integer" default-value="64" />
-			<parameter name="showSignatures" type="Boolean" default-value="true" />
 			<parameter name="showActions" type="Boolean" default-value="false" hidden="true" />
 			<parameter name="showPagination" type="Boolean" default-value="false" hidden="true" />
 		</parameters>

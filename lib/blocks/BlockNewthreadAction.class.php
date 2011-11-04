@@ -18,14 +18,10 @@ class privatemessaging_BlockNewthreadAction extends privatemessaging_BlockPostLi
 			return website_BlockView::NONE;
 		}
 		
-		$member = privatemessaging_MemberService::getInstance()->getCurrentMember();
+		$user = users_UserService::getInstance()->getCurrentUser();
 		$receiver = $this->getDocumentParameter();
-		$request->setAttribute('receiver', $receiver);
-		if ($receiver === null || !in_array($receiver, $member->getBlockedMembers()))
-		{
-			return $this->getInputViewName();
-		}		
-		return website_BlockView::ERROR;
+		$request->setAttribute('receiver', $receiver);	
+		return $this->getInputViewName();
 	}
 	
 	/**
@@ -87,14 +83,16 @@ class privatemessaging_BlockNewthreadAction extends privatemessaging_BlockPostLi
 	{
 		$post = $thread->getFirstPost();
 		$post->setThread($thread);
-		$post->setPostauthor(privatemessaging_MemberService::getInstance()->getCurrentMember());
+		$post->setAuthorid(users_UserService::getInstance()->getCurrentUser());
 		$post->setCreationdate(date_Calendar::getInstance()->toString());
 		$request->setAttribute('thread', $thread);
 		
 		$postListInfo = array();
 		$postListInfo['displayConfig'] = $this->getDisplayConfig();
 		$postListInfo['displayConfig']['hidePostLink'] = true;
-		$postListInfo['paginator'] = array($post);
+		$paginator = new paginator_Paginator('privatemessaging', 1, array($post), 1);
+		$paginator->setItemCount(1);
+		$postListInfo['paginator'] = $paginator;
 		$request->setAttribute('previewPostInfo', $postListInfo);
 		
 		return $this->getInputViewName();
@@ -102,7 +100,7 @@ class privatemessaging_BlockNewthreadAction extends privatemessaging_BlockPostLi
 	
 	/**
 	 * @param f_mvc_Request $request
-	 * @param forums_persistentdocument_member $member
+	 * @param privatemessaging_persistentdocument_thread $thread
 	 * @return Boolean
 	 */
 	private function validateThread($request, $thread)
@@ -110,18 +108,19 @@ class privatemessaging_BlockNewthreadAction extends privatemessaging_BlockPostLi
 		$rules = array_merge(BeanUtils::getBeanValidationRules('privatemessaging_persistentdocument_thread', null, null), BeanUtils::getSubBeanValidationRules('privatemessaging_persistentdocument_thread', 'firstPost', null, array('label', 'thread')));
 		$ok = $this->processValidationRules($rules, $request, $thread);
 		
+		$website = website_WebsiteService::getInstance()->getCurrentWebsite();
 		$usernames = explode(',', $request->getParameter('receivers'));
 		foreach ($usernames as $username)
 		{
-			$member = privatemessaging_MemberService::getInstance()->getByUserName(trim($username));
-			if ($member === null)
+			$user = users_UserService::getInstance()->getPublishedByLabel(trim($username), $website->getGroup()->getId());
+			if ($user === null)
 			{
 				$ok = false;
-				$this->addError(LocaleService::getInstance()->transFO('m.privatemessaging.fo.unknown-username', array('ucf'), array('username' => $username)));
+				$this->addError(LocaleService::getInstance()->trans('m.privatemessaging.fo.unknown-username', array('ucf'), array('username' => $username)));
 			}
 			else 
 			{
-				$thread->addFollowers($member);
+				$thread->addFollowers($user);
 			}
 		}
 		return $ok;

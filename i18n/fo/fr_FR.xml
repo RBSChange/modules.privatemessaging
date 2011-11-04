@@ -3,8 +3,8 @@
 	<key id="private-messaging">messagerie privée</key>
 	<key id="thread-list">liste des conversations privées</key>
 	<key id="newthread">nouvelle conversation privée</key>
-	<key id="nothread">vous n'avez aucune conversation privée en cours.</key>
-	<key id="message-preview">prévisualisation du message</key>
+	<key id="nothread">Vous n'avez aucune conversation privée en cours.</key>
+	<key id="nothread-with">Vous n'avez aucune conversation privée en cours avec {username}.</key>
 	<key id="message-input">saisie du message</key>
 	<key id="subject">sujet de la conversation</key>
 	<key id="answers">réponses</key>
@@ -33,6 +33,7 @@
 	<key id="receivers">destinataires séparés par des virgules</key>
 	<key id="member-informations">messagerie privée</key>
 	<key id="start-new-private-conversation">débuter une nouvelle conversation privée</key>
+	<key id="start-new-private-conversation-with">débuter une nouvelle conversation privée avec {username}</key>
 	<key id="written-by">écrit par</key>
 	<key id="answer-to">en réponse à</key>
 	<key id="toanswerof">en réponse à</key>
@@ -44,4 +45,8 @@
 	<key id="member-titles">titres</key>
 	<key id="member-rank">rang</key>
 	<key id="quote">citer</key>
+	<key id="restricted-access-must-login">vous devez vous connecter pour effectuer cette opération</key>
+	<key id="you-not-have-access">vous n'êtes pas autorisé à effectuer cette opération</key>
+	<key id="logged-as-and-baned">vous êtes connecté en tant que {name} or ce membre est banni jusqu'à la date suivante</key>
+	<key id="logged-as">Vous êtes connecté en tant que {name}.</key>
 </i18n>

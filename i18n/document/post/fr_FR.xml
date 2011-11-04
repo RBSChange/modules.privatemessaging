@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <i18n baseKey="m.privatemessaging.document.post" lcid="fr_FR">
-  <key id="document-name">message privé</key>
-  <key id="text">texte</key>
-  <key id="text-help">texte du message privé.</key>
-  <key id="postauthor">auteur</key>
-  <key id="thread">conversation</key>
-  <key id="thread-help">conversation privée à laquelle est rattaché ce message.</key>
-  <key id="answerof">réponse à</key>
-  <key id="answerof-help">message privé auquel ce message répond.</key>
-  <key id="number">numéro</key>
+	<include id="m.generic.document.document" />
+	<key id="document-name">message privé</key>
+	<key id="text">texte</key>
+	<key id="text-help">texte du message privé.</key>
+	<key id="thread">conversation</key>
+	<key id="thread-help">conversation privée à laquelle est rattaché ce message.</key>
+	<key id="answerof">réponse à</key>
+	<key id="answerof-help">message privé auquel ce message répond.</key>
+	<key id="number">numéro</key>
+	<key id="label-patern">message écrit par {author}</key>
 </i18n>

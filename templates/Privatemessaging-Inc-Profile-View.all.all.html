@@ -1,0 +1,17 @@
+<tal:block tal:condition="not:itsMyProfile">
+	<ul class="mini-navigation">
+		<li>
+			<a change:link="tag contextual_website_website_modules_privatemessaging_newthread; privatemessagingParam[receivers] user/getLabel">${trans:m.privatemessaging.fo.start-new-private-conversation-with,ucf,username=user/getLabelAsHtml}</a>
+		</li>
+	</ul>
+	
+	<h2 change:h="">${trans:m.privatemessaging.document.privatemessagingprofile.document-name,ucf}</h2>
+	
+	<tal:block tal:define="threads profile/getThreadsWithCurrentUser">
+		<tal:block tal:condition="php: count(threads)">
+			<tal:block tal:define="global threadColumnTitle">${trans:m.privatemessaging.fo.subject,ucf}</tal:block>
+			<tal:block change:include="module 'privatemessaging'; template 'Privatemessaging-Inc-ThreadList-Success'; type 'html'; threads threads; threadColumnTitle threadColumnTitle; showPagination 'false'" />
+		</tal:block>
+		<p tal:condition="php: !count(threads)">${trans:m.privatemessaging.fo.nothread-with,ucf,username=user/getLabelAsHtml}</p>
+	</tal:block>
+</tal:block>

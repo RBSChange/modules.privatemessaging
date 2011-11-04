@@ -20,22 +20,20 @@ class privatemessaging_BlockNewpostAction extends privatemessaging_BlockPostList
 		}
 
 		$thread = $this->getDocumentParameter();
-		if ($thread->isWriteable())
+		if (!$thread->isWriteable())
 		{
-			if ($request->getParameter('quote') == 'true' && !$request->getParameter('text') && $request->getParameter('postid'))
-			{
-				$quotedPost = privatemessaging_persistentdocument_post::getInstanceById($request->getParameter('postid'));
-				$post->setTextAsBBCode('[quote="' . $quotedPost->getAuthorNameAsHtml() . '"]' . $quotedPost->getTextAsBBCode() . '[/quote]');
-				$request->setAttribute('post', $post);
-			}
-			
-			$this->setRequestAttributes($request);
-			return $this->getInputViewName();
+			return $this->getForbiddenView();
 		}
 		
-		change_Controller::getInstance()->getStorage()->writeForUser('users_illegalAccessPage', $_SERVER["REQUEST_URI"]);
-		$request->setAttribute('member', forums_MemberService::getInstance()->getCurrentMember());
-		return $this->getTemplateByFullName('modules_forums', 'Forums-Block-Generic-Forbidden');
+		if ($request->getParameter('quote') == 'true' && !$request->getParameter('text') && $request->getParameter('postid'))
+		{
+			$quotedPost = privatemessaging_persistentdocument_post::getInstanceById($request->getParameter('postid'));
+			$post->setTextAsBBCode('[quote="' . $quotedPost->getAuthorNameAsHtml() . '"]' . $quotedPost->getTextAsBBCode() . '[/quote]');
+			$request->setAttribute('post', $post);
+		}
+		
+		$this->setRequestAttributes($request);
+		return $this->getInputViewName();
 	}
 
 	/**
@@ -119,7 +117,8 @@ class privatemessaging_BlockNewpostAction extends privatemessaging_BlockPostList
 		{
 			$post->setAnswerof(null);
 		}
-		$post->setPostauthor(privatemessaging_MemberService::getInstance()->getCurrentMember());
+		$user = users_UserService::getInstance()->getCurrentUser();
+		if ($user) { $post->setAuthorid($user->getId()); }
 		$post->setCreationdate(date_Calendar::getInstance()->toString());
 		$request->setAttribute('post', $post);
 		

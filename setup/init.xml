@@ -5,7 +5,7 @@
 	<binding fileName="modules/notification/persistentdocument/import/notification_binding.xml" />
 	<binding fileName="modules/privatemessaging/persistentdocument/import/privatemessaging_binding.xml" />
 
-	<systemfolder module="list" relatedmodule="forums">
+	<systemfolder module="list" relatedmodule="users">
 		<staticlistupdate listid="modules_users/editprofilepanels">
 			<staticitem label="&amp;modules.privatemessaging.fo.Member-informations;" value="privatemessaging/EditMemberProfile" />
 		</staticlistupdate>

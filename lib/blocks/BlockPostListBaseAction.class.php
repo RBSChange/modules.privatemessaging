@@ -3,7 +3,7 @@
  * privatemessaging_BlockPostListBaseAction
  * @package modules.privatemessaging
  */
-abstract class privatemessaging_BlockPostListBaseAction extends website_BlockAction
+abstract class privatemessaging_BlockPostListBaseAction extends privatemessaging_BaseBlockAction
 {
 	/**
 	 * @var Integer
@@ -17,13 +17,15 @@ abstract class privatemessaging_BlockPostListBaseAction extends website_BlockAct
 	{
 		$displayConfig = array();
 		
-		$member = privatemessaging_MemberService::getInstance()->getCurrentMember();
-		$displayConfig['showGravatars'] = $member->getViewAvatars();
+		$user = users_UserService::getInstance()->getCurrentUser();
+		$profile = privatemessaging_PrivatemessagingprofileService::getInstance()->getByAccessorId($user->getId(), true);
+		$displayConfig['showGravatars'] = $profile->getViewAvatars();
 		$displayConfig['avatarsSize'] = $this->getConfigurationValue('avatarsSize', 64);
-		$displayConfig['showSignatures'] = $member->getViewSignatures();
+		$displayConfig['showSignatures'] = $profile->getViewSignatures();
 		$displayConfig['showActions'] = $this->getConfigurationValue('showActions', false);
 		$displayConfig['showPagination'] = $this->getConfigurationValue('showPagination', true);
-		$displayConfig['currentMember'] = $member;
+		$displayConfig['currentUser'] = $user;
+		$displayConfig['currentProfile'] = $profile;
 		
 		return $displayConfig;
 	}

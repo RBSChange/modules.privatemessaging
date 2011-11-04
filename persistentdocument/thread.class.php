@@ -10,8 +10,8 @@ class privatemessaging_persistentdocument_thread extends privatemessaging_persis
 	 */
 	public function isViewable()
 	{
-		$member = privatemessaging_MemberService::getInstance()->getCurrentMember();
-		return in_array($member, $this->getFollowersArray());
+		$user = users_UserService::getInstance()->getCurrentUser();
+		return in_array($user, $this->getFollowersArray());
 	}
 	
 	/**
@@ -40,8 +40,9 @@ class privatemessaging_persistentdocument_thread extends privatemessaging_persis
 			return 0;
 		}
 		
-		$member = privatemessaging_MemberService::getInstance()->getCurrentMember();
-		$date = $member->getLastReadDateByThreadId($this->getId());
+		$user = users_UserService::getInstance()->getCurrentUser();
+		$profile = privatemessaging_PrivatemessagingprofileService::getInstance()->getCurrent($user->getId(), true);
+		$date = $profile->getLastReadDateByThreadId($this->getId());
 		$query = privatemessaging_PostService::getInstance()->createQuery()
 			->add(Restrictions::eq('thread', $this))
 			->setProjection(Projections::rowCount('count'))

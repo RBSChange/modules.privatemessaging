@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bindings xmlns="http://www.mozilla.org/xbl" xmlns:xbl="http://www.mozilla.org/xbl" xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	<binding id="cPrivatemessagingProfile">
+		<resources>
+			<stylesheet src="modules.uixul.cFieldsGroup" />
+		</resources>
+		<content>
+			<xul:groupbox flex="1">
+				<xul:caption label="${transui:m.privatemessaging.document.privatemessagingprofile.document-name,attr,ucf}" />
+				<xul:grid flex="1">
+					<xul:columns>
+						<xul:column />
+						<xul:column flex="1" />
+					</xul:columns>
+					<xul:rows>
+						<xul:row anonid="row_notifyNewMessages">
+							<xul:clabel id="privatemessaging_privatemessagingprofile_notifyNewMessages_label" control="privatemessaging_privatemessagingprofile_notifyNewMessages"
+								value="${transui:m.privatemessaging.document.privatemessagingprofile.notifynewmessages,attr,ucf}" />
+							<xul:cfield name="notifyNewMessages" id="privatemessaging_privatemessagingprofile_notifyNewMessages" anonid="field_notifyNewMessages"
+								fieldtype="boolean" shorthelp="${transui:m.privatemessaging.document.privatemessagingprofile.notifynewmessages-help,attr}" />
+						</xul:row>
+						<xul:row anonid="row_viewAvatars">
+							<xul:clabel id="privatemessaging_privatemessagingprofile_viewAvatars_label" control="privatemessaging_privatemessagingprofile_viewAvatars"
+								value="${transui:m.privatemessaging.document.privatemessagingprofile.viewavatars,attr,ucf}" />
+							<xul:cfield name="viewAvatars" id="privatemessaging_privatemessagingprofile_viewAvatars" anonid="field_viewAvatars"
+								fieldtype="boolean" shorthelp="${transui:m.privatemessaging.document.privatemessagingprofile.viewavatars-help,attr}" />
+						</xul:row>
+						<xul:row anonid="row_viewSignatures">
+							<xul:clabel id="privatemessaging_privatemessagingprofile_viewSignatures_label" control="privatemessaging_privatemessagingprofile_viewSignatures"
+								value="${transui:m.privatemessaging.document.privatemessagingprofile.viewsignatures,attr,ucf}" />
+							<xul:cfield name="viewSignatures" id="privatemessaging_privatemessagingprofile_viewSignatures" anonid="field_viewSignatures"
+								fieldtype="boolean" shorthelp="${transui:m.privatemessaging.document.privatemessagingprofile.viewsignatures-help,attr}" />
+						</xul:row>
+					</xul:rows>
+				</xul:grid>
+				<children />
+			</xul:groupbox>
+		</content>
+		<implementation>
+			<field name="mFields" />
+			<field name="mId" />
+
+			<constructor><![CDATA[
+				this.mFields = null;
+				this.mId = null;
+				wCore.debug('cPrivatemessagingProfile.constructor');
+				this.parentNode.registerProfile(this);
+			]]></constructor>
+
+			<method name="getElementByAnonId">
+				<parameter name="anonId" />
+				<body><![CDATA[
+					return document.getAnonymousElementByAttribute(this, "anonid", anonId);
+				]]></body>
+			</method>
+
+			<property name="fields" readonly="true">
+				<getter><![CDATA[
+					if (this.mFields == null)
+					{
+						var fieldsNames = ["notifyNewMessages", "viewAvatars", "viewSignatures"];
+						this.mFields = {};
+						var field = null;
+						var name = null;
+						for (var i = 0; i < fieldsNames.length; i++)
+						{
+							name = fieldsNames[i];
+							field = this.getElementByAnonId('field_' + name);
+							this.mFields[name] = field;
+						}
+					}
+					return this.mFields;
+				]]></getter>
+			</property>
+
+			<method name="setValues">
+				<parameter name="values" />
+				<body><![CDATA[
+					this.mId = values.id;
+					var fields = this.fields;
+					var field = null;				
+					for (var name in fields)
+					{
+						fields[name].setInitialValue((name in values) ? values[name] : '');
+					}
+				]]></body>
+			</method>
+
+			<method name="getValues">
+				<parameter name="values" />
+				<body><![CDATA[
+					var values = {"id" : this.mId};
+					var fields = this.fields;
+					var field = null;
+					for (var name in fields)
+					{
+						if (fields[name].modified)
+						{
+							var val = fields[name].value;
+							values[name] = (val === '') ?  null : val;
+						}
+					}
+					return values;
+				]]></body>
+			</method>
+		</implementation>
+	</binding>
+</bindings>

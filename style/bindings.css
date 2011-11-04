@@ -1,0 +1,3 @@
+profile[name="privatemessaging"]{
+	-moz-binding: url(binding:modules.privatemessaging.cProfile#cPrivatemessagingProfile);
+}

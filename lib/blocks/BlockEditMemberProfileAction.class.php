@@ -7,53 +7,71 @@ class privatemessaging_BlockEditMemberProfileAction extends website_BlockAction
 {
 	/**
 	 * @see website_BlockAction::execute()
-	 *
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
 	 * @return String
 	 */
-	function execute($request, $response)
+	public function execute($request, $response)
 	{
-		if ($this->isInBackoffice())
+		$user = users_UserService::getInstance()->getCurrentUser();
+		if ($this->isInBackofficeEdition() || $user === null)
 		{
 			return website_BlockView::NONE;
 		}
 		
-		$member = privatemessaging_MemberService::getInstance()->getCurrentMember();
-		if ($member === null)
+		$profile = privatemessaging_PrivatemessagingprofileService::getInstance()->getByAccessorId($user->getId());
+		if ($profile === null)
 		{
-			$user = users_UserService::getInstance()->getCurrentFrontEndUser();
-			$member = forums_MemberService::getInstance()->getNewDocumentInstance();
-			$member->setUser($user);
-			$member->save();
+			$profile = privatemessaging_PrivatemessagingprofileService::getInstance()->getNewDocumentInstance();
+			$profile->setAccessor($user);
 		}
-		$request->setAttribute('member', $member);
-		
+		$request->setAttribute('profile', $profile);
 		return website_BlockView::INPUT;
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function saveNeedTransaction()
+	{
+		return true;
 	}
 	
     /**
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
-	 * @param privatemessaging_persistentdocument_member $member
+	 * @param privatemessaging_persistentdocument_privatemessagingprofile $profile
 	 * @return String
 	 */
-	public function executeSave($request, $response, privatemessaging_persistentdocument_member $member)
+	public function executeSave($request, $response, privatemessaging_persistentdocument_privatemessagingprofile $profile)
 	{
-		$member->save();
-
-		$this->addMessage(LocaleService::getInstance()->transFO('m.users.frontoffice.informations-updated', array('ucf')));
-		
+		$user = users_UserService::getInstance()->getCurrentUser();
+		if ($profile->isNew())
+		{
+			$profile->setAccessor($user);
+		}
+		elseif ($user->getId() != $profile->getAccessorId()) 
+		{
+			throw new BaseException('Not your profile!', 'm.users.fo.not-your-profile');
+		}
+		$profile->save();
+		$request->setAttribute('profile', $profile);
+		RequestContext::getInstance()->resetProfile();
+		users_ProfileService::getInstance()->initCurrent(false);
+		$this->addMessage(LocaleService::getInstance()->trans('m.users.frontoffice.informations-updated', array('ucf', 'html')));
 		return website_BlockView::INPUT;
 	}
 	
 	/**
 	 * @param f_mvc_Request $request
-	 * @param privatemessaging_persistentdocument_member $member
+	 * @param privatemessaging_persistentdocument_privatemessagingprofile $profile
 	 */
-	public function validateSaveInput($request, $member)
+	public function validateSaveInput($request, $profile)
 	{
-		$val = BeanUtils::getBeanValidationRules('privatemessaging_persistentdocument_member', null, array('user'));
-		return $this->processValidationRules($val, $request, $member);
+		$user = users_UserService::getInstance()->getCurrentUser();
+		$profile->setAccessor($user);
+				
+		$rules = BeanUtils::getBeanValidationRules('privatemessaging_persistentdocument_privatemessagingprofile');
+		return $this->processValidationRules($rules, $request, $profile);
 	}
 }

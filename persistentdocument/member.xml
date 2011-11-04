@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<document xmlns="http://www.rbs.fr/schema/change-document/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.rbs.fr/schema/change-document/1.0 http://www.rbschange.fr/static/schema/change-document/1.0.xsd" model-version="1.0" icon="member"
-	has-url="false" indexable="false" backoffice-indexable="false" publish-on-day-change="false">
-	<properties>
-		<add name="label" default-value="private-messaging-member" />
-		<add name="user" type="modules_users/user" min-occurs="1" />
-		<add name="blockedMembers" type="modules_privatemessaging/member" max-occurs="-1" />
-		<add name="contacts" type="modules_privatemessaging/member" max-occurs="-1" />
-		<add name="viewAvatars" type="Boolean" default-value="true" />
-		<add name="viewSignatures" type="Boolean" default-value="true" />
-		<add name="notifyNewMessages" type="Boolean" default-value="true" />
-		<add name="trackingByThread" type="Lob" />
-	</properties>
-	<statuses default="ACTIVE" />
+<document xmlns="http://www.rbs.fr/schema/change-document/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.rbs.fr/schema/change-document/1.0 http://www.rbschange.fr/static/schema/change-document/4.0.xsd" model-version="1.0" icon="member" has-url="false" indexable="false" backoffice-indexable="false" publish-on-day-change="false">
+  <properties>
+    <property name="label" default-value="private-messaging-member"/>
+    <property name="user" type="modules_users/user" min-occurs="1"/>
+    <property name="blockedMembers" type="modules_privatemessaging/member" max-occurs="-1"/>
+    <property name="contacts" type="modules_privatemessaging/member" max-occurs="-1"/>
+    <property name="viewAvatars" type="Boolean" default-value="true"/>
+    <property name="viewSignatures" type="Boolean" default-value="true"/>
+    <property name="notifyNewMessages" type="Boolean" default-value="true"/>
+    <property name="trackingByThread" type="Lob"/>
+  </properties>
+  <statuses default="ACTIVE"/>
 </document>

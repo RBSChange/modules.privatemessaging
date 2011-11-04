@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<document xmlns="http://www.rbs.fr/schema/change-document/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.rbs.fr/schema/change-document/1.0 http://www.rbschange.fr/static/schema/change-document/1.0.xsd"
-	model-version="1.0" icon="message" has-url="true" backoffice-indexable="false" publish-on-day-change="false">
-	<properties>
-		<add name="text" type="LongString" min-occurs="1" />
-		<add name="postauthor" type="modules_privatemessaging/member" inverse="true" />
-		<add name="thread" type="modules_privatemessaging/thread" min-occurs="1" tree-node="true" inverse="true" />
-		<add name="answerof" type="modules_privatemessaging/post" />
-		<add name="number" type="Integer" />
-	</properties>
-	<statuses default="ACTIVE" />
+<document xmlns="http://www.rbs.fr/schema/change-document/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.rbs.fr/schema/change-document/1.0 http://www.rbschange.fr/static/schema/change-document/4.0.xsd" model-version="1.0" icon="message" has-url="true" backoffice-indexable="false" publish-on-day-change="false">
+  <properties>
+    <property name="text" type="LongString" min-occurs="1"/>
+    <property name="postauthor" type="modules_privatemessaging/member" inverse="true"/>
+    <property name="thread" type="modules_privatemessaging/thread" min-occurs="1" tree-node="true" inverse="true"/>
+    <property name="answerof" type="modules_privatemessaging/post"/>
+    <property name="number" type="Integer"/>
+  </properties>
+  <statuses default="ACTIVE"/>
 </document>

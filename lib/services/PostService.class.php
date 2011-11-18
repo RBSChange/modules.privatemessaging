@@ -38,7 +38,7 @@ class privatemessaging_PostService extends f_persistentdocument_DocumentService
 	 */
 	public function createQuery()
 	{
-		return $this->pp->createQuery('modules_privatemessaging/post');
+		return $this->getPersistentProvider()->createQuery('modules_privatemessaging/post');
 	}
 	
 	/**
@@ -49,7 +49,7 @@ class privatemessaging_PostService extends f_persistentdocument_DocumentService
 	 */
 	public function createStrictQuery()
 	{
-		return $this->pp->createQuery('modules_privatemessaging/post', false);
+		return $this->getPersistentProvider()->createQuery('modules_privatemessaging/post', false);
 	}
 	
 	/**
@@ -104,13 +104,13 @@ class privatemessaging_PostService extends f_persistentdocument_DocumentService
 		}
 
 		$document->setNumber($thread->getNbpost() + 1);
-		$this->pp->updateDocument($document);
+		$this->getPersistentProvider()->updateDocument($document);
 		
 		$thread->setNbpost($thread->getNbpost() + 1);
 		$thread->setModificationdate(date_Calendar::now()->toString());
 		$thread->setLastPostDate($document->getCreationdate());
 		
-		$this->pp->updateDocument($thread);
+		$this->getPersistentProvider()->updateDocument($thread);
 		
 		$ns = notification_NotificationService::getInstance();
 		$notif = $ns->getNotificationByCodeName('modules_privatemessaging/newprivatemessage');
@@ -181,24 +181,26 @@ class privatemessaging_PostService extends f_persistentdocument_DocumentService
 		$postDate = $post->getCreationdate();
 		try
 		{
-			$this->tm->beginTransaction();
+			$this->getTransactionManager()->beginTransaction();
 			
 			$profile = privatemessaging_PrivatemessagingprofileService::getInstance()->getByAccessorId($user->getId(), true);
 			$track = $profile->getDecodedTrackingByThread();
-			$thread = $post->getThread();
-			$threadId = $thread->getId();
-			if (!isset($track[$threadId]) || $track[$threadId] < $postDate)
+			if (is_array($track))
 			{
-				$track[$threadId] = $postDate;
+				$threadId = $post->getThread()->getId();
+				if (!isset($track[$threadId]) || $track[$threadId] < $postDate)
+				{
+					$track[$threadId] = $postDate;
+				}
+				$profile->setTrackingByThread($track);
 			}
-			$profile->setTrackingByThread($track);
 			
-			$this->pp->updateDocument($profile);
-			$this->tm->commit();
+			$this->getPersistentProvider()->updateDocument($profile);
+			$this->getTransactionManager()->commit();
 		}
 		catch (Exception $e)
 		{
-			$this->tm->rollBack($e);
+			$this->getTransactionManager()->rollBack($e);
 		}
 	}
 }

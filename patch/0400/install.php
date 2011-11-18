@@ -10,11 +10,11 @@ class privatemessaging_patch_0400 extends change_Patch
 	 */
 	public function getPreCommandList()
 	{
-		/*return array(
+		return array(
 			array('disable-site'),
 			array('compile-documents'),
 			array('generate-database'),
-		);*/
+		);
 	}
 	
 	/**
@@ -77,10 +77,10 @@ class privatemessaging_patch_0400 extends change_Patch
 	 */
 	public function getPostCommandList()
 	{
-		/*return array(
+		return array(
 			array('clear-documentscache'),
 			array('enable-site'),
-		);*/
+		);
 	}
 	
 	/**

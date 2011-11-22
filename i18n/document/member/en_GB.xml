@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<i18n baseKey="m.privatemessaging.document.member" lcid="en_GB">
+  <key id="blockedmembers">ignore list</key>
+  <key id="blockedmembers-help">The people on your ignore list will not be able to send you private messages.</key>
+  <key id="contacts">contacts</key>
+  <key id="contacts-help">Your contact list allows you to quickly access the members with which you frequently communicate.</key>
+  <key id="document-name">private messaging user</key>
+  <key id="notifynewmessages">notify of new messages</key>
+  <key id="notifynewmessages-help">Check this box to receive an email notification for each new private message.</key>
+  <key id="viewavatars">view avatars</key>
+  <key id="viewavatars-help">Shows or hides members' avatars in private messages.</key>
+  <key id="viewsignatures">view signatures</key>
+  <key id="viewsignatures-help">Shows or hides members' signatures in private messages.</key>
+</i18n>

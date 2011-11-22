@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<i18n baseKey="m.privatemessaging.document.post" lcid="en_GB">
+  <key id="answerof">answer to</key>
+  <key id="answerof-help">private message to which this message responds.</key>
+  <key id="document-name">private message</key>
+  <key id="number">number</key>
+  <key id="postauthor">author</key>
+  <key id="text">text</key>
+  <key id="text-help">This is the text of the private message.</key>
+  <key id="thread">conversation</key>
+  <key id="thread-help">This is the private conversation with which this message is associated.</key>
+</i18n>

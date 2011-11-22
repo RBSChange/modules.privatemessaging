@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<i18n baseKey="m.privatemessaging.document.thread" lcid="en_GB">
+  <key id="document-name">private conversation</key>
+  <key id="firstpost">first message</key>
+  <key id="firstpost-help">This is the first message in this private conversation.</key>
+  <key id="followers">recipients</key>
+  <key id="followers-help">These are the recipients of this private conversation. Only these members will be able to read the messages in the conversation.</key>
+  <key id="label">subject</key>
+  <key id="label-help">conversation subject</key>
+  <key id="nbpost">number of messages</key>
+  <key id="nbpost-help">This is the number of messages in this private conversation.</key>
+</i18n>

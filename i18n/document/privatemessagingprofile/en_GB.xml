@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<i18n lcid="en_GB" baseKey="m.privatemessaging.document.privatemessagingprofile">
+  <include id="m.generic.document.document"/>
+  <key id="document-name"/>
+  <key id="viewavatars"/>
+  <key id="viewavatars-help"/>
+  <key id="viewsignatures"/>
+  <key id="viewsignatures-help"/>
+  <key id="notifynewmessages"/>
+  <key id="notifynewmessages-help"/>
+</i18n>

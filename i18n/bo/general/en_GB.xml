@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<i18n baseKey="m.privatemessaging.bo.general" lcid="en_GB">
+  <key id="module-name">private messaging</key>
+  <key id="system-folder-name">private messaging</key>
+  <key id="topic-already-contains-some-of-this-pages">This topic already contains some of the pages.</key>
+</i18n>

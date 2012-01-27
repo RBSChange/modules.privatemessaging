@@ -1,15 +1,15 @@
 <form change:form="beanClass privatemessaging_persistentdocument_member; beanName member">
 	<fieldset>
-		<legend>${title}</legend>
+		<legend class="h-2">${title}</legend>
 		<ul change:errors=""></ul>
 		<ul change:messages=""></ul>
-		<input change:field="name beanId" hidden="true" />	
 		<ol>
 			<li><input change:field="name notifyNewMessages" /></li>
 			<li><input change:field="name viewAvatars" /></li>
 			<li><input change:field="name viewSignatures" /></li>
 		</ol>
 		<p class="buttons">
+			<input change:field="name beanId" hidden="true" />	
 			<input change:submit="labeli18n m.users.frontoffice.editprofil.submitbutton" class="button" name="save" />
 		</p>
 	</fieldset>

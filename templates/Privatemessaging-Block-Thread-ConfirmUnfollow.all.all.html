@@ -1,14 +1,17 @@
 <h1 change:h="">${thread/getLabelAsHtml}</h1>
-<p class="normal" tal:define="count thread/getFollowersCount">
-<tal:block tal:condition="php: count LE 1">${trans:m.privatemessaging.fo.you-are-last-follower,ucf}</tal:block>
-	<tal:block tal:condition="php: count GT 1">
-		${trans:m.privatemessaging.fo.Followers,ucf,lab}
+<tal:block tal:define="count thread/getFollowersCount">
+	<p class="normal" tal:condition="php: count LE 1">${trans:m.privatemessaging.fo.you-are-last-follower,ucf}</p>
+	<dl tal:condition="php: count GT 1" class="inline-list normal-margin">
+		<dt>${trans:m.privatemessaging.fo.Followers,ucf}</dt>
 		<tal:block tal:repeat="follower thread/getFollowersArray">
-			<tal:block tal:condition="php: !repeat.follower.start && repeat.follower.end"> ${trans:m.privatemessaging.fo.and} </tal:block>
-			<strong>${follower/getMemberLink}</strong><tal:block tal:condition="php: repeat.follower.index LT (repeat.follower.length - 2)">, </tal:block>
+			<dd>
+				<strong>${follower/getMemberLink}</strong>
+				<span tal:condition="php: repeat.follower.index LT (repeat.follower.length - 2)" class="punctuation">, </span>
+				<span tal:condition="php: repeat.follower.index EQ (repeat.follower.length - 2)" class="punctuation">${trans:m.privatemessaging.fo.and}</span>
+			</dd>
 		</tal:block>
-	</tal:block>
-</p>
+	</dl>
+</tal:block>
 
 <h2 change:h="">${trans:m.privatemessaging.fo.confirm-unfollow-title,ucf}</h2>
 <p class="normal">${trans:m.privatemessaging.fo.confirm-unfollow-description,ucf}</p>

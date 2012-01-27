@@ -6,8 +6,8 @@
 
 <form change:form="beanClass privatemessaging_persistentdocument_thread; beanName thread">
 	<fieldset>
-		<legend>${trans:m.forums.frontoffice.message-input,ucf}</legend>
-		<div change:errors=""></div>
+		<legend class="h-2">${trans:m.forums.frontoffice.message-input,ucf}</legend>
+		<ul change:errors=""></ul>
 		<ol>
 			<li><input change:textinput="" required="true" name="receivers" labeli18n="m.privatemessaging.fo.receivers" /></li>
 			<li><input change:field="name label" /></li>

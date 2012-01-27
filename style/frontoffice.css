@@ -1,0 +1,36 @@
+.modules-privatemessaging table.normal th {
+	white-space: nowrap;
+}
+.modules-privatemessaging table.normal td,
+.modules-privatemessaging table.normal .column-bullet img,
+.modules-privatemessaging table.normal .column-avatar img {
+	vertical-align: middle;
+}
+.modules-privatemessaging table.normal .column-bullet {
+	min-width: 30px;
+	text-align: center;
+}
+.modules-privatemessaging table.normal .column-avatar {
+	min-width: 40px;
+	text-align: center;
+}
+.modules-privatemessaging table.normal .column-label {
+	width: 100%;
+}
+.modules-privatemessaging table.normal .column-posts,
+.modules-privatemessaging table.normal .column-threads {
+	white-space: nowrap;
+	min-width: 75px;
+	text-align: center;
+}
+.modules-privatemessaging table.normal .column-last-post {
+	white-space: nowrap;
+	min-width: 150px;
+	text-align: center;
+}
+.modules-privatemessaging table.normal .column-date,
+.modules-privatemessaging table.normal .column-country {
+	white-space: nowrap;
+	min-width: 100px;
+	text-align: center;
+}

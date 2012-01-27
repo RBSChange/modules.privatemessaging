@@ -7,7 +7,7 @@
 		</li>
 		
 		<tal:block tal:condition="not: post/wasDeleted">
-			<li class="${php: repeat.post.start ? 'start' : ''} ${php: repeat.post.end ? 'last' : ''} ${php: repeat.post.odd ? 'odd' : 'even'}" id="post-${post/getId}">
+			<li class="${php: repeat.post.start ? 'start' : ''} ${php: repeat.post.end ? 'last' : ''} ${alternateclass:postIndex}" id="post-${post/getId}">
 				<div class="message-header">
 					<p class="float-right" tal:condition="not: displayConfig/hidePostLink">
 						<a change:link="document post">${post/getPostId}</a>
@@ -75,7 +75,7 @@
 					<ul class="inline-list" tal:condition="php: displayConfig['showActions']">
 						<li>
 							<a change:link="tag contextual_website_website_modules_privatemessaging_newpost; privatemessagingParam[cmpref] post/getThread/getId ; privatemessagingParam[postid] post/getId">${trans:m.privatemessaging.fo.answer,ucf}</a>
-							<span> | </span>
+							<span class="separator"> | </span>
 						</li>
 						<li>
 							<a change:link="tag contextual_website_website_modules_privatemessaging_newpost; privatemessagingParam[cmpref] post/getThread/getId ; privatemessagingParam[postid] post/getId ; privatemessagingParam[quote] 'true'">${trans:m.privatemessaging.fo.quote,ucf}</a>

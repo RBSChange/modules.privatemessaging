@@ -187,7 +187,7 @@ class privatemessaging_MemberService extends f_persistentdocument_DocumentServic
 			foreach ($docs as $doc)
 			{
 				/* @var $doc privatemessaging_persistentdocument_member */
-				$post->getDocumentService()->treatMemberForMemberDeletion($doc, $member);
+				$doc->getDocumentService()->treatMemberForMemberDeletion($doc, $member);
 			}
 			$count += count($docs);
 		}

@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://www.rbs.fr/schema/change-component/1.0 http://www.rbschange.fr/static/schema/change-component/1.0.xsd">
 	<name>privatemessaging</name>
 	<type>change-module</type>
-	<version>3.5.5</version>
+	<version>3.5.6</version>
 	<description>Private messaging module</description>
 	<license>os</license>
 	<repository>public</repository>
@@ -11,7 +11,7 @@
 		<dependency>
 			<name>change-module/forums</name>
 			<versions>
-				<version>3.5.5</version>
+				<version>3.5.6</version>
 			</versions>
 		</dependency>
 	</dependencies>

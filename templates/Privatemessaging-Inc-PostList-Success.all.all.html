@@ -53,7 +53,7 @@
 				<div class="message-content">
 					${structure post/getTextAsHtml}
 					<tal:block tal:condition="displayConfig/showSignatures">
-						<tal:block tal:condition="authorForumProfile/getSignatureAsHtml">
+						<tal:block tal:condition="authorForumProfile/getSignature">
 							<hr class="signature-separator" />
 							<div class="member-signature">${structure authorForumProfile/getSignatureAsHtml}</div>
 						</tal:block>

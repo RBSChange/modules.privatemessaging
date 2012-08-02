@@ -7,6 +7,9 @@
 			</contextactions>	
 		</model>
 	</models>
+	<toolbar>
+		<toolbarbutton name="edit" />
+	</toolbar>
 	<actions>
 		<action name="refresh" single="true" icon="refresh" labeli18n="m.uixul.bo.actions.Refresh" />
 		<action name="edit" single="true" permission="Load" icon="edit" labeli18n="m.uixul.bo.actions.Edit" />

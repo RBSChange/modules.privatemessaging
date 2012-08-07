@@ -27,5 +27,8 @@
 				<changeblock type="modules_privatemessaging_newpost" />
 			</changecontent>
 		</page>
+		<permissions>
+			<frontendpermission module="website" role="AuthenticatedFrontUser" group-refid="websitefrontendgroup"/>
+		</permissions>
 	</topic>
 </script>

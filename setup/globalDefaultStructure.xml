@@ -1,28 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <script>
 	<binding fileName="modules/website/persistentdocument/import/website_binding.xml" />
-
 	<topic byDocumentId-attr="">
-		<page label="Liste des conversations" isIndexPage="true" navigationVisibility="hidden" indexingstatus="false"
-			byTag="contextual_website_website_modules_privatemessaging_threadlist">
+		<page label="Liste des conversations" isIndexPage="true" navigationVisibility="hidden" indexingstatus="false" byTag="contextual_website_website_modules_privatemessaging_threadlist">
 			<changecontent for="content-block">
 				<changeblock type="modules_privatemessaging_threadlist" />
 			</changecontent>
 		</page>
-		<page label="Détail d'une conversation" navigationVisibility="hidden" indexingstatus="false"
-			byTag="contextual_website_website_modules_privatemessaging_thread">
+		<page label="Détail d'une conversation" navigationVisibility="hidden" indexingstatus="false" byTag="contextual_website_website_modules_privatemessaging_thread">
 			<changecontent for="content-block">
 				<changeblock type="modules_privatemessaging_thread" />
 			</changecontent>
 		</page>
-		<page label="Nouvelle conversation" navigationVisibility="hidden" indexingstatus="false"
-			byTag="contextual_website_website_modules_privatemessaging_newthread">
+		<page label="Nouvelle conversation" navigationVisibility="hidden" indexingstatus="false" byTag="contextual_website_website_modules_privatemessaging_newthread">
 			<changecontent for="content-block">
 				<changeblock type="modules_privatemessaging_newthread" />
 			</changecontent>
 		</page>
-		<page label="Réponse à une conversation" navigationVisibility="hidden" indexingstatus="false"
-			byTag="contextual_website_website_modules_privatemessaging_newpost">
+		<page label="Réponse à une conversation" navigationVisibility="hidden" indexingstatus="false" byTag="contextual_website_website_modules_privatemessaging_newpost">
 			<changecontent for="content-block">
 				<changeblock type="modules_privatemessaging_newpost" />
 			</changecontent>

@@ -31,7 +31,7 @@ abstract class privatemessaging_BlockPostListBaseAction extends privatemessaging
 	}
 	
 	/**
-	 * @return Integer
+	 * @return integer
 	 */
 	protected function getNbItemPerPage()
 	{
@@ -40,7 +40,7 @@ abstract class privatemessaging_BlockPostListBaseAction extends privatemessaging
 	}
 	
 	/**
-	 * @param String $name
+	 * @param string $name
 	 * @param Mixed $defaultValue
 	 * @return Mixed
 	 */

@@ -9,7 +9,7 @@ class privatemessaging_BlockEditMemberProfileAction extends website_BlockAction
 	 * @see website_BlockAction::execute()
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
-	 * @return String
+	 * @return string
 	 */
 	public function execute($request, $response)
 	{
@@ -37,11 +37,11 @@ class privatemessaging_BlockEditMemberProfileAction extends website_BlockAction
 		return true;
 	}
 	
-    /**
+	/**
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
 	 * @param privatemessaging_persistentdocument_privatemessagingprofile $profile
-	 * @return String
+	 * @return string
 	 */
 	public function executeSave($request, $response, privatemessaging_persistentdocument_privatemessagingprofile $profile)
 	{

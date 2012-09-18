@@ -1,27 +1,10 @@
 <?php
 /**
- * privatemessaging_PostService
  * @package modules.privatemessaging
+ * @method privatemessaging_PostService getInstance()
  */
 class privatemessaging_PostService extends f_persistentdocument_DocumentService
 {
-	/**
-	 * @var privatemessaging_PostService
-	 */
-	private static $instance;
-
-	/**
-	 * @return privatemessaging_PostService
-	 */
-	public static function getInstance()
-	{
-		if (self::$instance === null)
-		{
-			self::$instance = new self();
-		}
-		return self::$instance;
-	}
-
 	/**
 	 * @return privatemessaging_persistentdocument_post
 	 */
@@ -54,7 +37,7 @@ class privatemessaging_PostService extends f_persistentdocument_DocumentService
 	
 	/**
 	 * @param privatemessaging_persistentdocument_post $document
-	 * @param Integer $parentNodeId Parent node ID where to save the document.
+	 * @param integer $parentNodeId Parent node ID where to save the document.
 	 * @return void
 	 */
 	protected function preInsert($document, $parentNodeId = null)
@@ -90,7 +73,7 @@ class privatemessaging_PostService extends f_persistentdocument_DocumentService
 	
 	/**
 	 * @param privatemessaging_persistentdocument_post $document
-	 * @param Integer $parentNodeId Parent node ID where to save the document.
+	 * @param integer $parentNodeId Parent node ID where to save the document.
 	 * @return void
 	 */
 	protected function postInsert($document, $parentNodeId = null)
@@ -165,7 +148,7 @@ class privatemessaging_PostService extends f_persistentdocument_DocumentService
 	
 	/**
 	 * @param privatemessaging_persistentdocument_post $document
-	 * @return String
+	 * @return string
 	 */
 	public function generateUrl($document)
 	{

@@ -9,7 +9,7 @@ class privatemessaging_BlockThreadAction extends privatemessaging_BlockPostListB
 	 * @see website_BlockAction::execute()
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
-	 * @return String
+	 * @return string
 	 */
 	function execute($request, $response)
 	{
@@ -85,7 +85,7 @@ class privatemessaging_BlockThreadAction extends privatemessaging_BlockPostListB
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
 	 * @param privatemessaging_persistentdocument_thread $thread
-	 * @return String
+	 * @return string
 	 */
 	function executeAddFollower($request, $response, privatemessaging_persistentdocument_thread $thread)
 	{

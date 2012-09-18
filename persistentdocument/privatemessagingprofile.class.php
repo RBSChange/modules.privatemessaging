@@ -6,7 +6,7 @@
 class privatemessaging_persistentdocument_privatemessagingprofile extends privatemessaging_persistentdocument_privatemessagingprofilebase
 {
 	/**
-	 * @param Integer $threadId
+	 * @param integer $threadId
 	 */
 	public function getLastReadDateByThreadId($threadId)
 	{

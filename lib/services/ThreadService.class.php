@@ -1,27 +1,10 @@
 <?php
 /**
- * privatemessaging_ThreadService
  * @package modules.privatemessaging
+ * @method privatemessaging_ThreadService getInstance()
  */
 class privatemessaging_ThreadService extends f_persistentdocument_DocumentService
 {
-	/**
-	 * @var privatemessaging_ThreadService
-	 */
-	private static $instance;
-
-	/**
-	 * @return privatemessaging_ThreadService
-	 */
-	public static function getInstance()
-	{
-		if (self::$instance === null)
-		{
-			self::$instance = new self();
-		}
-		return self::$instance;
-	}
-
 	/**
 	 * @return privatemessaging_persistentdocument_thread
 	 */
@@ -38,7 +21,7 @@ class privatemessaging_ThreadService extends f_persistentdocument_DocumentServic
 	 */
 	public function createQuery()
 	{
-		return $this->pp->createQuery('modules_privatemessaging/thread');
+		return $this->getPersistentProvider()->createQuery('modules_privatemessaging/thread');
 	}
 	
 	/**
@@ -49,13 +32,13 @@ class privatemessaging_ThreadService extends f_persistentdocument_DocumentServic
 	 */
 	public function createStrictQuery()
 	{
-		return $this->pp->createQuery('modules_privatemessaging/thread', false);
+		return $this->getPersistentProvider()->createQuery('modules_privatemessaging/thread', false);
 	}
 	
 	/**
 	 * @param privatemessaging_persistentdocument_thread $thread
-	 * @param Integer $start
-	 * @param Integer $limit
+	 * @param integer $start
+	 * @param integer $limit
 	 * @return privatemessaging_persistentdocument_post[]
 	 */
 	public function getPosts($thread, $start = null, $limit = 20, $order = 'asc')
@@ -92,7 +75,7 @@ class privatemessaging_ThreadService extends f_persistentdocument_DocumentServic
 	
 	/**
 	 * @param privatemessaging_persistentdocument_thread $thread
-	 * @param String $date
+	 * @param string $date
 	 * @return privatemessaging_persistentdocument_post
 	 */
 	public function getFirstUnreadPost($thread, $date)
@@ -106,7 +89,7 @@ class privatemessaging_ThreadService extends f_persistentdocument_DocumentServic
 	
 	/**
 	 * @param privatemessaging_persistentdocument_thread $thread
-	 * @return String
+	 * @return string
 	 */
 	public function getUserUrl($thread)
 	{
@@ -158,7 +141,7 @@ class privatemessaging_ThreadService extends f_persistentdocument_DocumentServic
 
 	/**
 	 * @param privatemessaging_persistentdocument_thread $document
-	 * @param Integer $parentNodeId Parent node ID where to save the document.
+	 * @param integer $parentNodeId Parent node ID where to save the document.
 	 * @return void
 	 */
 	protected function preInsert($document, $parentNodeId = null)
@@ -192,7 +175,7 @@ class privatemessaging_ThreadService extends f_persistentdocument_DocumentServic
 	{
 		$query = $this->createQuery();
 		$query->add(Restrictions::eq('authorid', $user->getId()));
-		$query->setFirstResult(0)->setMaxResults($max - $count);
+		$query->setFirstResult(0)->setMaxResults($max);
 		$threads = $query->find();
 		foreach ($threads as $thread)
 		{

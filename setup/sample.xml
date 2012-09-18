@@ -2,7 +2,6 @@
 <script>
 	<binding fileName="modules/website/persistentdocument/import/website_binding.xml" />
 	<binding fileName="modules/privatemessaging/persistentdocument/import/privatemessaging_binding.xml" />
-	
 	<website byTag="default_modules_website_default-website">
 		<execute method="setDocumentIdAttribute" />
 		<topic byLabel="Messagerie privée">

@@ -1,27 +1,10 @@
 <?php
 /**
- * privatemessaging_PrivatemessagingprofileService
  * @package modules.privatemessaging
+ * @method privatemessaging_PrivatemessagingprofileService getInstance()
  */
 class privatemessaging_PrivatemessagingprofileService extends users_ProfileService
 {
-	/**
-	 * @var privatemessaging_PrivatemessagingprofileService
-	 */
-	private static $instance;
-
-	/**
-	 * @return privatemessaging_PrivatemessagingprofileService
-	 */
-	public static function getInstance()
-	{
-		if (self::$instance === null)
-		{
-			self::$instance = new self();
-		}
-		return self::$instance;
-	}
-	
 	/**
 	 * @return privatemessaging_persistentdocument_privatemessagingprofile
 	 */

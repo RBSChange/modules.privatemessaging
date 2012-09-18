@@ -10,7 +10,7 @@ class privatemessaging_Setup extends object_InitDataSetup
 	}
 
 	/**
-	 * @return String[]
+	 * @return string[]
 	 */
 	public function getRequiredPackages()
 	{

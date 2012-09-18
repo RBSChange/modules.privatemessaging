@@ -6,7 +6,7 @@
 class privatemessaging_persistentdocument_thread extends privatemessaging_persistentdocument_threadbase 
 {
 	/**
-	 * @return Boolean
+	 * @return boolean
 	 */
 	public function isViewable()
 	{
@@ -15,7 +15,7 @@ class privatemessaging_persistentdocument_thread extends privatemessaging_persis
 	}
 	
 	/**
-	 * @return Boolean
+	 * @return boolean
 	 */
 	public function isWriteable()
 	{
@@ -23,7 +23,7 @@ class privatemessaging_persistentdocument_thread extends privatemessaging_persis
 	}
 	
 	/**
-	 * @return String
+	 * @return string
 	 */
 	public function getUserUrl()
 	{
@@ -31,7 +31,7 @@ class privatemessaging_persistentdocument_thread extends privatemessaging_persis
 	}
 	
 	/**
-	 * @return Integer
+	 * @return integer
 	 */
 	public function getNbnewpost()
 	{

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <i18n baseKey="m.privatemessaging.fo" lcid="fr_FR">
 	<key id="private-messaging">messagerie privée</key>
 	<key id="thread-list">liste des conversations privées</key>

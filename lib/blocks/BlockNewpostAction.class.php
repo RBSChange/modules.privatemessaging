@@ -10,7 +10,7 @@ class privatemessaging_BlockNewpostAction extends privatemessaging_BlockPostList
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
 	 * @param privatemessaging_persistentdocument_post $post
-	 * @return String
+	 * @return string
 	 */
 	public function execute($request, $response, privatemessaging_persistentdocument_post $post)
 	{
@@ -64,7 +64,7 @@ class privatemessaging_BlockNewpostAction extends privatemessaging_BlockPostList
 	}
 	
 	/**
-	 * @return String
+	 * @return string
 	 */
 	public function getInputViewName()
 	{
@@ -83,7 +83,7 @@ class privatemessaging_BlockNewpostAction extends privatemessaging_BlockPostList
 	 * @see website_BlockAction::execute()
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
-	 * @return String
+	 * @return string
 	 */
 	public function executeSubmit($request, $response, privatemessaging_persistentdocument_post $post)
 	{
@@ -109,7 +109,7 @@ class privatemessaging_BlockNewpostAction extends privatemessaging_BlockPostList
 	 * @see website_BlockAction::execute()
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
-	 * @return String
+	 * @return string
 	 */
 	public function executePreview($request, $response, privatemessaging_persistentdocument_post $post)
 	{

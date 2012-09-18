@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<tags extends="generic">
-	<tag labeli18n="m.privatemessaging.bo.blocks.threadlist.title" icon="list-block">contextual_website_website_modules_privatemessaging_threadlist</tag>
-	<tag labeli18n="m.privatemessaging.bo.blocks.thread.title" icon="thread">contextual_website_website_modules_privatemessaging_thread</tag>
-	<tag labeli18n="m.privatemessaging.bo.blocks.newthread.title" icon="add">contextual_website_website_modules_privatemessaging_newthread</tag>
-	<tag labeli18n="m.privatemessaging.bo.blocks.newpost.title" icon="add">contextual_website_website_modules_privatemessaging_newpost</tag>
-</tags>

@@ -6,7 +6,7 @@
 class privatemessaging_persistentdocument_post extends privatemessaging_persistentdocument_postbase 
 {
 	/**
-	 * @return String
+	 * @return string
 	 */
 	public function getAuthorName()
 	{
@@ -19,7 +19,7 @@ class privatemessaging_persistentdocument_post extends privatemessaging_persiste
 	}
 	
 	/**
-	 * @return String
+	 * @return string
 	 */
 	public function getAuthorNameAsHtml()
 	{
@@ -61,7 +61,7 @@ class privatemessaging_persistentdocument_post extends privatemessaging_persiste
 	}
 	
 	/**
-	 * @return Boolean
+	 * @return boolean
 	 */
 	public function isAnswer()
 	{
@@ -69,7 +69,7 @@ class privatemessaging_persistentdocument_post extends privatemessaging_persiste
 	}
 	
 	/**
-	 * @return String
+	 * @return string
 	 */
 	public function getThreadLabel()
 	{
@@ -77,7 +77,7 @@ class privatemessaging_persistentdocument_post extends privatemessaging_persiste
 	}
 	
 	/**
-	 * @return String
+	 * @return string
 	 */
 	public function getThreadLabelAsHtml()
 	{
@@ -85,7 +85,7 @@ class privatemessaging_persistentdocument_post extends privatemessaging_persiste
 	}
 	
 	/**
-	 * @return String
+	 * @return string
 	 */
 	public function getPostId()
 	{

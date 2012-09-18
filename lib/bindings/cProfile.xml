@@ -7,7 +7,7 @@
 		</resources>
 		<content>
 			<xul:groupbox flex="1">
-				<xul:caption label="${transui:m.privatemessaging.document.privatemessagingprofile.document-name,attr,ucf}" />
+				<xul:caption label="${trans:m.privatemessaging.document.privatemessagingprofile.document-name,attr,ucf}" />
 				<xul:grid flex="1">
 					<xul:columns>
 						<xul:column />
@@ -16,21 +16,21 @@
 					<xul:rows>
 						<xul:row anonid="row_notifyNewMessages">
 							<xul:clabel id="privatemessaging_privatemessagingprofile_notifyNewMessages_label" control="privatemessaging_privatemessagingprofile_notifyNewMessages"
-								value="${transui:m.privatemessaging.document.privatemessagingprofile.notifynewmessages,attr,ucf}" />
+								value="${trans:m.privatemessaging.document.privatemessagingprofile.notifynewmessages,attr,ucf}" />
 							<xul:cfield name="notifyNewMessages" id="privatemessaging_privatemessagingprofile_notifyNewMessages" anonid="field_notifyNewMessages"
-								fieldtype="boolean" shorthelp="${transui:m.privatemessaging.document.privatemessagingprofile.notifynewmessages-help,attr}" />
+								fieldtype="boolean" shorthelp="${trans:m.privatemessaging.document.privatemessagingprofile.notifynewmessages-help,attr}" />
 						</xul:row>
 						<xul:row anonid="row_viewAvatars">
 							<xul:clabel id="privatemessaging_privatemessagingprofile_viewAvatars_label" control="privatemessaging_privatemessagingprofile_viewAvatars"
-								value="${transui:m.privatemessaging.document.privatemessagingprofile.viewavatars,attr,ucf}" />
+								value="${trans:m.privatemessaging.document.privatemessagingprofile.viewavatars,attr,ucf}" />
 							<xul:cfield name="viewAvatars" id="privatemessaging_privatemessagingprofile_viewAvatars" anonid="field_viewAvatars"
-								fieldtype="boolean" shorthelp="${transui:m.privatemessaging.document.privatemessagingprofile.viewavatars-help,attr}" />
+								fieldtype="boolean" shorthelp="${trans:m.privatemessaging.document.privatemessagingprofile.viewavatars-help,attr}" />
 						</xul:row>
 						<xul:row anonid="row_viewSignatures">
 							<xul:clabel id="privatemessaging_privatemessagingprofile_viewSignatures_label" control="privatemessaging_privatemessagingprofile_viewSignatures"
-								value="${transui:m.privatemessaging.document.privatemessagingprofile.viewsignatures,attr,ucf}" />
+								value="${trans:m.privatemessaging.document.privatemessagingprofile.viewsignatures,attr,ucf}" />
 							<xul:cfield name="viewSignatures" id="privatemessaging_privatemessagingprofile_viewSignatures" anonid="field_viewSignatures"
-								fieldtype="boolean" shorthelp="${transui:m.privatemessaging.document.privatemessagingprofile.viewsignatures-help,attr}" />
+								fieldtype="boolean" shorthelp="${trans:m.privatemessaging.document.privatemessagingprofile.viewsignatures-help,attr}" />
 						</xul:row>
 					</xul:rows>
 				</xul:grid>

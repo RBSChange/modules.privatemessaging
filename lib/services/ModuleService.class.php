@@ -1,27 +1,10 @@
 <?php
 /**
- * @package modules.privatemessaging.lib.services
+ * @package modules.privatemessaging
+ * @method privatemessaging_ModuleService getInstance()
  */
 class privatemessaging_ModuleService extends ModuleBaseService
 {
-	/**
-	 * Singleton
-	 * @var privatemessaging_ModuleService
-	 */
-	private static $instance = null;
-
-	/**
-	 * @return privatemessaging_ModuleService
-	 */
-	public static function getInstance()
-	{
-		if (is_null(self::$instance))
-		{
-			self::$instance = new self();
-		}
-		return self::$instance;
-	}
-	
 	/**
 	 * @return boolean
 	 */

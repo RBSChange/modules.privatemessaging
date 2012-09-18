@@ -9,7 +9,7 @@ class privatemessaging_BlockNewthreadAction extends privatemessaging_BlockPostLi
 	 * @see website_BlockAction::execute()
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
-	 * @return String
+	 * @return string
 	 */
 	public function execute($request, $response)
 	{
@@ -25,7 +25,7 @@ class privatemessaging_BlockNewthreadAction extends privatemessaging_BlockPostLi
 	}
 	
 	/**
-	 * @return String
+	 * @return string
 	 */
 	public function getInputViewName()
 	{
@@ -35,7 +35,7 @@ class privatemessaging_BlockNewthreadAction extends privatemessaging_BlockPostLi
 	/**
 	 * @param f_mvc_Request $request
 	 * @param privatemessaging_persistentdocument_thread $thread
-	 * @return Boolean
+	 * @return boolean
 	 */
 	public function validateSubmitInput($request, privatemessaging_persistentdocument_thread $thread)
 	{
@@ -47,7 +47,7 @@ class privatemessaging_BlockNewthreadAction extends privatemessaging_BlockPostLi
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
 	 * @param privatemessaging_persistentdocument_thread $thread
-	 * @return String
+	 * @return string
 	 */
 	public function executeSubmit($request, $response, privatemessaging_persistentdocument_thread $thread)
 	{
@@ -65,7 +65,7 @@ class privatemessaging_BlockNewthreadAction extends privatemessaging_BlockPostLi
 	/**
 	 * @param f_mvc_Request $request
 	 * @param privatemessaging_persistentdocument_thread $thread
-	 * @return Boolean
+	 * @return boolean
 	 */
 	public function validatePreviewInput($request, privatemessaging_persistentdocument_thread $thread)
 	{
@@ -77,7 +77,7 @@ class privatemessaging_BlockNewthreadAction extends privatemessaging_BlockPostLi
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
 	 * @param privatemessaging_persistentdocument_thread $thread
-	 * @return String
+	 * @return string
 	 */
 	public function executePreview($request, $response, privatemessaging_persistentdocument_thread $thread)
 	{
@@ -101,7 +101,7 @@ class privatemessaging_BlockNewthreadAction extends privatemessaging_BlockPostLi
 	/**
 	 * @param f_mvc_Request $request
 	 * @param privatemessaging_persistentdocument_thread $thread
-	 * @return Boolean
+	 * @return boolean
 	 */
 	private function validateThread($request, $thread)
 	{

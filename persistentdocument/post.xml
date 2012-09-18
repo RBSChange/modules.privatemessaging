@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
-<document xmlns="http://www.rbs.fr/schema/change-document/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.rbs.fr/schema/change-document/1.0 http://www.rbschange.fr/static/schema/change-document/4.0.xsd"
-	model-version="1.0" icon="message" has-url="true" backoffice-indexable="false" publish-on-day-change="false">
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://www.rbs.fr/schema/change-document/1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.rbs.fr/schema/change-document/1.0 http://www.rbschange.fr/schema/persistentdocument-4.0.xsd" model-version="1.0" icon="message" has-url="true" backoffice-indexable="false" use-publication-dates="false">
 	<properties>
-		<property name="text" type="BBCode" min-occurs="1" />
-		<property name="thread" type="modules_privatemessaging/thread" min-occurs="1" tree-node="true" inverse="true" />
-		<property name="answerof" type="modules_privatemessaging/post" />
+		<property name="text" type="BBCode" required="true" />
+		<property name="thread" type="Document" tree-node="true" inverse="true" document-type="modules_privatemessaging/thread" required="true" />
+		<property name="answerof" type="Document" document-type="modules_privatemessaging/post" />
 		<property name="number" type="Integer" />
 	</properties>
 	<statuses default="ACTIVE" />

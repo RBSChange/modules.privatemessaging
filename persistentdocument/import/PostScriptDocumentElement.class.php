@@ -5,15 +5,15 @@
  */
 class privatemessaging_PostScriptDocumentElement extends import_ScriptDocumentElement
 {
-    /**
-     * @return privatemessaging_persistentdocument_post
-     */
-    protected function initPersistentDocument()
-    {
-    	return privatemessaging_PostService::getInstance()->getNewDocumentInstance();
-    }
-    
-    /**
+	/**
+	 * @return privatemessaging_persistentdocument_post
+	 */
+	protected function initPersistentDocument()
+	{
+		return privatemessaging_PostService::getInstance()->getNewDocumentInstance();
+	}
+	
+	/**
 	 * @return f_persistentdocument_PersistentDocumentModel
 	 */
 	protected function getDocumentModel()

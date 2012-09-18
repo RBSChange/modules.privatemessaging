@@ -9,7 +9,7 @@ class privatemessaging_BlockThreadlistAction extends privatemessaging_BaseBlockA
 	 * @see website_BlockAction::execute()
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
-	 * @return String
+	 * @return string
 	 */
 	function execute($request, $response)
 	{
@@ -36,7 +36,7 @@ class privatemessaging_BlockThreadlistAction extends privatemessaging_BaseBlockA
 	/**
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
-	 * @return Integer default 10
+	 * @return integer default 10
 	 */
 	private function getNbItemPerPage($request, $response)
 	{

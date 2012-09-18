@@ -46,13 +46,13 @@ class privatemessaging_BlockThreadAction extends privatemessaging_BlockPostListB
 			return 'AddFollower';
 		}
 
-		$nbItemPerPage = 10; // TODO: parametrize.
+		$nbItemPerPage = $this->getConfiguration()->getNbitemperpage();
 		$page = 1;
 		if ($request->hasParameter('page'))
 		{
 			$page = $request->getParameter('page');
 		}
-		else if ($request->hasParameter('postId'))
+		elseif ($request->hasParameter('postId'))
 		{
 			$page = ceil(DocumentHelper::getDocumentInstance($request->getParameter('postId'))->getNumber() / $nbItemPerPage);		
 		}
@@ -61,8 +61,7 @@ class privatemessaging_BlockThreadAction extends privatemessaging_BlockPostListB
 			$page = 1;
 		}
 		$posts = privatemessaging_ThreadService::getInstance()->getPosts($thread, ($nbItemPerPage * ($page - 1)) + 1, $nbItemPerPage);
-		$paginator = new paginator_Paginator('privatemessaging', $page, $posts, $nbItemPerPage);
-		$paginator->setItemCount($thread->getNbpost());
+		$paginator = new paginator_Paginator('privatemessaging', $page, $posts, $nbItemPerPage, $thread->getNbpost(), array('test', 'privatemessagingParam[postId]'));
 				
 		if (count($posts) > 0)
 		{

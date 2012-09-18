@@ -145,14 +145,23 @@ class privatemessaging_PostService extends f_persistentdocument_DocumentService
 		}
 		return $parameters;
 	}
-	
+
 	/**
+	 * @param website_UrlRewritingService $urlRewritingService
 	 * @param privatemessaging_persistentdocument_post $document
-	 * @return string
+	 * @param website_persistentdocument_website $website
+	 * @param string $lang
+	 * @param array $parameters
+	 * @return f_web_Link | null
 	 */
-	public function generateUrl($document)
+	public function getWebLink($urlRewritingService, $document, $website, $lang, $parameters)
 	{
-		return LinkHelper::getDocumentUrl($document->getThread(), null, array('privatemessagingParam[postId]' => $document->getId())) . "#post-" . $document->getId();
+		$parameters['postId'] = $document->getId();
+		$link = $urlRewritingService->getDocumentLinkForWebsite($document->getThread(), $website, $lang, $parameters);
+		if ($link) {
+			$link->setFragment($document->getAnchor());
+		}
+		return $link;
 	}
 	
 	/**

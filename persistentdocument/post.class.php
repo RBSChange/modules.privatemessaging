@@ -91,4 +91,12 @@ class privatemessaging_persistentdocument_post extends privatemessaging_persiste
 	{
 		return $this->getThread()->getId() . '.' . $this->getNumber();
 	}
+	
+	/**
+	 * @return string
+	 */
+	public function getAnchor()
+	{
+		return 'post-'.$this->getId();
+	}
 }

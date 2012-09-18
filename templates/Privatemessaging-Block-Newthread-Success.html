@@ -1,0 +1,22 @@
+<h1 change:h="">${trans:m.privatemessaging.fo.newthread,ucf}</h1>
+
+<tal:block tal:condition="previewPostInfo">
+	<tal:block change:include="module 'privatemessaging'; template 'Privatemessaging-Inc-PostList-Success'; type 'html'; postListInfo previewPostInfo; displayConfig previewPostInfo/displayConfig" />
+</tal:block>
+
+<form change:form="beanClass privatemessaging_persistentdocument_thread; beanName thread">
+	<fieldset>
+		<legend class="h-2">${trans:m.forums.frontoffice.message-input,ucf}</legend>
+		<ul change:errors=""></ul>
+	<ol>
+			<li><input change:textinput="required true" name="receivers" labeli18n="m.privatemessaging.fo.receivers" /></li>
+			<li><input change:field="name label" /></li>
+			<li><input change:bbcodeinput="name firstPost.textAsBBCode; required true" module-profile="privatemessaging" labeled="true" /></li>
+		</ol>
+		<p class="buttons">
+			<input change:field="name beanId" hidden="true" />
+			<input class="button" name="preview" change:submit="labeli18n m.privatemessaging.fo.form-preview" />
+			<input class="button" change:submit="labeli18n m.privatemessaging.fo.form-submit"/>
+		</p>
+	</fieldset>
+</form>

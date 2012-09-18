@@ -1,0 +1,44 @@
+<tal:block tal:condition="php: count(threads)">
+	<table tal:condition="php: count(threads)" class="normal forums-table">
+		<thead>
+			<tr>
+				<th class="column-bullet"></th>
+				<th class="column-label">${threadColumnTitle}</th>
+				<th class="column-posts">${trans:m.privatemessaging.fo.answers,ucf}</th>
+				<th class="column-last-post">${trans:m.privatemessaging.fo.last-post,ucf}</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tal:block tal:repeat="thread threads">
+				<tr tal:define="newCount thread/getNbnewpost ; postCount thread/getNbpost" class="${php: repeat.thread.odd ? 'odd' : 'even'}">
+					<td class="column-bullet" >
+						<img tal:condition="php: newCount >= 1 && newCount == postCount" change:img="front/new-thread.png" title="${trans:m.privatemessaging.fo.is-new-thread,attr,ucf}" />
+						<img tal:condition="php: newCount == 1 && newCount != postCount" change:img="front/has-new-post.png" title="${trans:m.privatemessaging.fo.has-new-post,attr,ucf}" />
+						<img tal:condition="php: newCount > 1 && newCount != postCount" change:img="front/has-new-post.png" title="${trans:m.privatemessaging.fo.has-n-new-posts,attr,ucf,count=newCount" />
+						<img tal:condition="not: newCount" change:img="front/has-no-new-post.png" title="${trans:m.privatemessaging.fo.has-no-new-post,attr,ucf}" />
+					</td>
+					<td class="column-label" tal:define="count thread/getFollowersCount">
+						<a href="${thread/getUserUrl}" class="link">${thread/getLabel}</a>
+						<br />
+						<tal:block tal:condition="php: count LE 1">${trans:m.privatemessaging.fo.you-are-last-follower,ucf}</tal:block>
+						<tal:block tal:condition="php: count GT 1">
+							${trans:m.privatemessaging.fo.followers,ucf,lab}
+							<tal:block tal:repeat="follower thread/getFollowersArray">
+								<tal:block tal:condition="php: !repeat.follower.start && repeat.follower.end"> ${trans:m.privatemessaging.fo.and,ucf} </tal:block>
+								<strong><a change:link="document follower">${follower/getLabel}</a></strong><tal:block tal:condition="php: repeat.follower.index LT (repeat.follower.length - 2)">, </tal:block>
+							</tal:block>
+						</tal:block>
+					</td>
+					<td class="column-posts">${php: postCount-1}</td>
+					<td class="column-last-post" tal:define="lastPost thread/getLastPost; lastPostAuthor lastPost/getAuthoridInstance">
+						${datetime:lastPost/getUICreationdate}
+						<br />
+						<tal:block tal:condition="lastPostAuthor"><a change:link="document lastPostAuthor">${lastPostAuthor/getLabel}</a></tal:block>
+						<tal:block tal:condition="not: lastPostAuthor">${trans:m.privatemessaging.fo.unknown,ucf}</tal:block>
+					</td>
+				</tr>
+			</tal:block>
+		</tbody>
+	</table>
+	<tal:block tal:condition="showPagination" change:paginator="threads" />
+</tal:block>

@@ -1,0 +1,30 @@
+<h1 change:h="">${trans:m.privatemessaging.fo.newpost,ucf,lab} ${thread/getLabel}</h1>
+
+<tal:block tal:condition="previewPostInfo">
+	<tal:block change:include="module 'privatemessaging'; template 'Privatemessaging-Inc-PostList-Success'; type 'html'; postListInfo previewPostInfo" />
+</tal:block>
+
+<form change:form="beanClass privatemessaging_persistentdocument_post; beanName post">
+	<fieldset>
+		<legend class="h-2">${trans:m.forums.frontoffice.message-input,ucf}</legend>
+		<ul change:errors=""></ul>
+		<ol>
+	  		<li><input change:bbcodeinput="name textAsBBCode; required true" module-profile="privatemessaging" labeled="true" /></li>
+		</ol>
+		<p class="buttons">
+			<input change:field="name beanId" hidden="true" />
+			<input change:field="name thread" hidden="true" value="${thread/getId}" />
+			<input tal:condition="answerof" change:field="name answerof" hidden="true" value="${answerof/getId}" />
+			<input name="preview" change:submit="labeli18n m.privatemessaging.fo.form-preview" />
+			<input change:submit="labeli18n m.privatemessaging.fo.form-submit" />
+		</p>
+	</fieldset>
+</form>
+<tal:block tal:condition="answerof">
+	<h2 change:h="">${trans:m.privatemessaging.fo.toanswerof,ucf} <a change:link="document answerof/getAuthoridInstance">${answerof/getAuthorName}</a></h2>
+	<tal:block change:include="module 'privatemessaging'; template 'Privatemessaging-Inc-PostList-Success'; type 'html'; postListInfo answerListInfo" />
+</tal:block>
+<tal:block tal:condition="not: answerof">
+	<h2 change:h="">${trans:m.privatemessaging.fo.last-posts-in-thread,ucf}</h2>
+	<tal:block change:include="module 'privatemessaging'; template 'Privatemessaging-Inc-PostList-Success'; type 'html'; postListInfo lastPostListInfo" />
+</tal:block>

@@ -7,7 +7,7 @@
 	</block>
 	<block type="modules_privatemessaging_thread" icon="thread">
 		<parameters>
-			<parameter name="nbitemperpage" type="Integer" default-value="1" hidden="true" />
+			<parameter name="nbitemperpage" type="Integer" default-value="10" />
 			<parameter name="avatarsSize" type="Integer" default-value="64" />
 			<parameter name="showActions" type="Boolean" default-value="true" hidden="true" />
 		</parameters>

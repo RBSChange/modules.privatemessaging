@@ -1,0 +1,84 @@
+<tal:block tal:define="global displayConfig postListInfo/displayConfig" />
+
+<ul class="document-list message-list">
+	<tal:block tal:repeat="post postListInfo/paginator">
+		<li class="${php: repeat.post.start ? 'start' : ''} ${php: repeat.post.end ? 'last' : ''} ${alternateclass:postIndex}" id="post-${post/getId}">
+			<div class="message-header">
+				<p class="float-right" tal:condition="not: displayConfig/hidePostLink">
+					<a tal:condition="not: post/isNew" change:link="document post">${post/getPostId}</a>
+					<tal:block tal:condition="post/isAnswer" tal:define="answerOf post/getAnswerof; answerOfAuthor answerOf/getAuthoridInstance">
+						${trans:m.privatemessaging.fo.answer-to}
+						<a change:link="document post/getAnswerof">${post/getAnswerof/getPostId}</a>
+						${trans:m.privatemessaging.fo.written-by,ucf}
+						<tal:block tal:condition="answerOfAuthor"><a change:link="document answerOfAuthor">${answerOf/getAuthorName}</a></tal:block>
+						<tal:block tal:condition="not: answerOfAuthor">${answerOf/getAuthorName}</tal:block>
+					</tal:block>
+				</p>
+				<p>${datetime:post/getUICreationdate}</p>
+				<div class="cleaner"></div>					
+			</div>
+			
+			<div class="message-body" tal:define="author post/getAuthoridInstance; authorForumProfile post/getAuthorForumsProfile">
+				<div class="author-information" tal:condition="author">
+					<tal:block tal:condition="displayConfig/showGravatars">
+						<img change:avatar="user author" size="${displayConfig/avatarsSize}" />
+						<br />
+					</tal:block>
+					<tal:block tal:condition="not:author">${structure post/getAuthorNameAsHtml}</tal:block>
+					<tal:block tal:condition="author">
+						<a change:link="document author">${author/getLabel}</a>
+						<tal:block tal:condition="authorForumProfile">
+							<tal:block tal:repeat="title authorForumProfile/getPublishedForumsTitleArray">
+								<br />
+								<strong>${trans:m.privatemessaging.fo.member-title,ucf,lab}</strong> ${title/getLabel}
+								<tal:block tal:define="visual title/getVisual" tal:condition="visual/isPublished">
+									<br />
+									<img change:media="document visual" />
+								</tal:block>
+							</tal:block>
+							<tal:block tal:define="rank authorForumProfile/getRank" tal:condition="rank">
+								<br />
+								<strong>${trans:m.privatemessaging.fo.member-rank,ucf,lab}</strong> ${rank/getLabel}
+								<tal:block tal:define="visual rank/getVisual" tal:condition="visual/isPublished">
+									<br />
+									<img change:media="document visual" />
+								</tal:block>
+							</tal:block>
+						</tal:block>
+					</tal:block>
+				</div>
+				<div class="author-information" tal:condition="not: author">
+					${trans:m.privatemessaging.fo.unknown,ucf}
+				</div>
+				<div class="message-content">
+					${structure post/getTextAsHtml}
+					<tal:block tal:condition="displayConfig/showSignatures">
+						<tal:block tal:condition="authorForumProfile/getSignature">
+							<hr class="signature-separator" />
+							<div class="member-signature">${structure authorForumProfile/getSignatureAsHtml}</div>
+						</tal:block>
+					</tal:block>
+				</div>
+				<div class="cleaner"></div>
+			</div>
+	
+			<div class="message-footer">
+				<ul class="inline-list float-right">
+					<li><a class="link" href="#top">${trans:m.privatemessaging.fo.top,ucf}</a></li>
+				</ul>
+				<ul class="inline-list" tal:condition="php: displayConfig['showActions']">
+					<li>
+						<a change:link="tag contextual_website_website_modules_privatemessaging_newpost; privatemessagingParam[cmpref] post/getThread/getId ; privatemessagingParam[postid] post/getId">${trans:m.privatemessaging.fo.answer,ucf}</a>
+						<span class="separator"> | </span>
+					</li>
+					<li>
+						<a change:link="tag contextual_website_website_modules_privatemessaging_newpost; privatemessagingParam[cmpref] post/getThread/getId ; privatemessagingParam[postid] post/getId ; privatemessagingParam[quote] 'true'">${trans:m.privatemessaging.fo.quote,ucf}</a>
+					</li>
+				</ul>
+				<div class="cleaner"></div>
+			</div>
+		</li>
+	</tal:block>
+</ul>
+
+<tal:block tal:condition="displayConfig/showPagination" change:paginator="postListInfo/paginator" />

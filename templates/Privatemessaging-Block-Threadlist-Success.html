@@ -1,0 +1,10 @@
+<h2 change:h="">${trans:m.privatemessaging.fo.thread-list,ucf}</h2>
+<ul class="inline-list normal-margin">
+	<li><a change:link="tag contextual_website_website_modules_privatemessaging_newthread">${trans:m.privatemessaging.fo.newthread,ucf}</a></li>
+</ul>
+
+<tal:block tal:condition="php: count(paginator)">
+	<tal:block tal:define="global threadColumnTitle">${trans:m.privatemessaging.fo.subject,ucf}</tal:block>
+	<tal:block change:include="module 'privatemessaging'; template 'Privatemessaging-Inc-ThreadList-Success'; type 'html'; threads paginator; threadColumnTitle threadColumnTitle; showPagination 'true'" />
+</tal:block>
+<p tal:condition="php: !count(paginator)">${trans:m.privatemessaging.fo.nothread,ucf}</p>

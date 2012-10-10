@@ -12,7 +12,7 @@ class privatemessaging_BlockNewpostAction extends privatemessaging_BlockPostList
 	 * @param privatemessaging_persistentdocument_post $post
 	 * @return string
 	 */
-	public function execute($request, $response, privatemessaging_persistentdocument_post $post)
+	public function execute($request, $response, privatemessaging_persistentdocument_post $post = null)
 	{
 		if ($this->isInBackoffice())
 		{

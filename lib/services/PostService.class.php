@@ -67,7 +67,8 @@ class privatemessaging_PostService extends f_persistentdocument_DocumentService
 			$replacements = array(
 				'author' => ($author !== null) ? $author->getLabel() : '[...]'
 			);
-			$document->setLabel(LocaleService::getInstance()->transData('m.privatemessaging.document.post.label-patern', array('ucf'), $replacements));
+			$rc = RequestContext::getInstance();
+			$document->setLabel($ls->formatKey($rc->getLang(), 'm.privatemessaging.document.post.label-patern', array('ucf'), $replacements));
 		}
 	}
 	

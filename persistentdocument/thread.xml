@@ -5,7 +5,7 @@
 	<properties>
 		<add name="firstPost" type="modules_privatemessaging/post" />
 		<add name="nbpost" type="Integer" default-value="0" />
-		<add name="followers" type="modules_privatemessaging/member" />
+		<add name="followers" type="modules_privatemessaging/member" max-occurs="-1" />
 		<add name="tofollow" type="modules_privatemessaging/post" />
 		<add name="lastPostDate" type="DateTime" />
 	</properties>

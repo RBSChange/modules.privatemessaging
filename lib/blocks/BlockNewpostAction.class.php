@@ -25,14 +25,15 @@ class privatemessaging_BlockNewpostAction extends privatemessaging_BlockPostList
 			if ($request->getParameter('quote') == 'true' && !$request->getParameter('text') && $request->getParameter('postid'))
 			{
 				$quotedPost = privatemessaging_persistentdocument_post::getInstanceById($request->getParameter('postid'));
-				$post->setTextAsBBCode('[quote="' . $quotedPost->getAuthorNameAsHtml() . '"]' . $quotedPost->getTextAsBBCode() . '[/quote]');
+				$post->setTextAsBBCode(
+					'[quote="' . $quotedPost->getAuthorNameAsHtml() . '"]' . $quotedPost->getTextAsBBCode() . '[/quote]');
 				$request->setAttribute('post', $post);
 			}
-			
+
 			$this->setRequestAttributes($request);
 			return $this->getInputViewName();
 		}
-		
+
 		$agaviUser = Controller::getInstance()->getContext()->getUser();
 		$agaviUser->setAttribute('illegalAccessPage', $_SERVER["REQUEST_URI"]);
 		$request->setAttribute('member', forums_MemberService::getInstance()->getCurrentMember());
@@ -56,7 +57,7 @@ class privatemessaging_BlockNewpostAction extends privatemessaging_BlockPostList
 			$postListInfo['paginator'] = array($answerTo);
 			$request->setAttribute('answerListInfo', $postListInfo);
 		}
-		else 
+		else
 		{
 			$posts = privatemessaging_ThreadService::getInstance()->getPosts($thread, 0, $this->getNbItemPerPage(), 'desc');
 			$postListInfo = array();
@@ -65,13 +66,25 @@ class privatemessaging_BlockNewpostAction extends privatemessaging_BlockPostList
 			$request->setAttribute('lastPostListInfo', $postListInfo);
 		}
 	}
-	
+
 	/**
 	 * @return String
 	 */
 	public function getInputViewName()
 	{
 		return website_BlockView::SUCCESS;
+	}
+
+	/**
+	 * @return string[]
+	 */
+	public function getPostBeanInclude()
+	{
+		if (Framework::getConfigurationValue('modules/website/useBeanPopulateStrictMode') != 'false')
+		{
+			return array('textAsBBCode', 'thread', 'answerof');
+		}
+		return null;
 	}
 
 	/**
@@ -86,20 +99,27 @@ class privatemessaging_BlockNewpostAction extends privatemessaging_BlockPostList
 	 * @see website_BlockAction::execute()
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
+	 * @param privatemessaging_persistentdocument_post $post
+	 * @throws Exception
 	 * @return String
 	 */
 	public function executeSubmit($request, $response, privatemessaging_persistentdocument_post $post)
 	{
-		if	($post->getAnswerof() !== null && $post->getAnswerof()->getThread()->getId() != $post->getThread()->getId())
+		if ($post->getAnswerof() && $post->getAnswerof()->isModified())
+		{
+			throw new Exception("Bad parameter");
+		}
+
+		if ($post->getAnswerof() !== null && $post->getAnswerof()->getThread()->getId() != $post->getThread()->getId())
 		{
 			$post->setAnswerof(null);
 		}
 		$post->save();
 		$post->getDocumentService()->activate($post->getId());
-						
+
 		HttpController::getInstance()->redirectToUrl(LinkHelper::getDocumentUrl($post));
 	}
-	
+
 	/**
 	 * @return Array
 	 */
@@ -107,31 +127,32 @@ class privatemessaging_BlockNewpostAction extends privatemessaging_BlockPostList
 	{
 		return BeanUtils::getBeanValidationRules('privatemessaging_persistentdocument_post', null, array('label', 'thread'));
 	}
-	
+
 	/**
 	 * @see website_BlockAction::execute()
 	 * @param f_mvc_Request $request
 	 * @param f_mvc_Response $response
+	 * @param privatemessaging_persistentdocument_post $post
 	 * @return String
 	 */
 	public function executePreview($request, $response, privatemessaging_persistentdocument_post $post)
 	{
-		if	($post->getAnswerof() !== null && $post->getAnswerof()->getThread()->getId() != $post->getThread()->getId())
+		if ($post->getAnswerof() !== null && $post->getAnswerof()->getThread()->getId() != $post->getThread()->getId())
 		{
 			$post->setAnswerof(null);
 		}
 		$post->setPostauthor(privatemessaging_MemberService::getInstance()->getCurrentMember());
 		$post->setCreationdate(date_Calendar::getInstance()->toString());
 		$request->setAttribute('post', $post);
-		
+
 		$postListInfo = array();
 		$postListInfo['displayConfig'] = $this->getDisplayConfig();
 		$postListInfo['displayConfig']['hidePostLink'] = true;
 		$postListInfo['paginator'] = array($post);
 		$request->setAttribute('previewPostInfo', $postListInfo);
-		
+
 		$this->setRequestAttributes($request);
-		
+
 		return $this->getInputViewName();
 	}
 }

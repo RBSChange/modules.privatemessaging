@@ -35,6 +35,18 @@ class privatemessaging_BlockNewthreadAction extends privatemessaging_BlockPostLi
 	{
 		return website_BlockView::SUCCESS;
 	}
+
+	/**
+	 * @return string[]
+	 */
+	public function getThreadBeanInclude()
+	{
+		if (Framework::getConfigurationValue('modules/website/useBeanPopulateStrictMode') != 'false')
+		{
+			return array('receivers', 'label', 'firstPost.textAsBBCode');
+		}
+		return null;
+	}
 	
 	/**
 	 * @param f_mvc_Request $request
@@ -45,7 +57,7 @@ class privatemessaging_BlockNewthreadAction extends privatemessaging_BlockPostLi
 	{
 		return $this->validateThread($request, $thread);
 	}
-	
+
 	/**
 	 * @see website_BlockAction::execute()
 	 * @param f_mvc_Request $request
@@ -99,10 +111,10 @@ class privatemessaging_BlockNewthreadAction extends privatemessaging_BlockPostLi
 		
 		return $this->getInputViewName();
 	}
-	
+
 	/**
 	 * @param f_mvc_Request $request
-	 * @param forums_persistentdocument_member $member
+	 * @param privatemessaging_persistentdocument_thread $thread
 	 * @return Boolean
 	 */
 	private function validateThread($request, $thread)
